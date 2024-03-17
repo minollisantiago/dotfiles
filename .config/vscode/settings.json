@@ -1,0 +1,149 @@
+{
+    "workbench.colorTheme": "Solarized Osaka",
+    "workbench.iconTheme": "material-icon-theme",
+    "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "[python]": {"editor.formatOnType": true},
+    "git.openRepositoryInParentFolders": "never",
+    "glassit.alpha": 255,
+    "jupyter.askForKernelRestart": false,
+    "files.autoSave": "afterDelay",
+    "window.menuBarVisibility": "compact",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "editor.suggest.preview": true,
+    "python.languageServer": "Pylance",
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    "debug.console.fontSize": 16,
+    "terminal.integrated.fontSize": 16,
+    "editor.fontFamily": "FiraCode Nerd Font Mono",
+    "window.zoomLevel": 1,
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "markdown-preview-enhanced.previewTheme": "vue.css",
+    "workbench.sideBar.location": "right",
+    
+    // VIM MOTIONS
+    "editor.lineNumbers": "relative",
+    // "vim.useCtrlKeys": true,
+    "vim.leader": "<Space>",
+    "vim.hlsearch": true,
+    
+    
+    "vim.visualModeKeyBindingsNonRecursive": [
+      // NAVIGATION
+      // switch b/w buffers
+
+      // Stay in visual mode while indenting
+      { "before": ["S-tab"], "commands": ["editor.action.outdentLines"] },
+      { "before": ["tab"], "commands": ["editor.action.indentLines"] },
+
+      // Move selected lines while staying in visual mode
+      { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+      { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+
+      // toggle comment selection
+      { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
+
+    ], 
+    
+    "vim.normalModeKeyBindingsNonRecursive": [
+      // NAVIGATION
+      // switch b/w buffers
+
+      //jump down/up half a page and center view
+      {"before": ["<C-d>"], "after": ["<C-d>", "z", "z"]},
+      {"before": ["<C-u>"], "after": ["<C-u>", "z", "z"]},
+
+      //Jump between patter matches and center view
+      {"before": ["n"], "after": ["n", "z", "z"]},
+      {"before": ["N"], "after": ["N", "z", "z"]},
+
+      // Switch between tabs
+      { "before": ["<S-tab>"], "commands": [":bprevious"] },
+      { "before": ["<tab>"], "commands": [":bnext"] },
+  
+      // splits
+      { "before": ["leader", "v"], "commands": [":vsplit"] },
+      { "before": ["leader", "s"], "commands": [":split"] },
+  
+      // panes
+      {
+        "before": ["leader", "h"], 
+        "commands": ["workbench.action.focusLeftGroup"]
+      },
+      {
+        "before": ["leader", "j"],
+        "commands": ["workbench.action.focusBelowGroup"]
+      },
+      {
+        "before": ["leader", "k"],
+        "commands": ["workbench.action.focusAboveGroup"]
+      },
+      {
+        "before": ["leader", "l"],
+        "commands": ["workbench.action.focusRightGroup"]
+      },
+      // NICE TO HAVE
+      { "before": ["leader", "w"], "commands": [":w!"] }, //save
+      { "before": ["leader", "q"], "commands": [":q!"] }, //close
+      { "before": ["leader", "x"], "commands": [":x!"] }, //save & close
+      {
+        "before": ["[", "d"],
+        "commands": ["editor.action.marker.prev"]
+      },
+      {
+        "before": ["]", "d"],
+        "commands": ["editor.action.marker.next"]
+      },
+      {
+        "before": ["<leader>", "c", "a"],
+        "commands": ["editor.action.quickFix"]
+      },
+      { "before": ["leader", "f"], "commands": ["workbench.action. quickOpen"] },
+      { "before": ["leader", "p"], "commands": ["editor.action.formatDocument"] },
+      {
+        "before": ["g", "h"],
+        "commands": ["editor.action.showDefinitionPreviewHover"]
+      }, 
+
+      // THE NAME ---> HARPOON
+
+      {
+        "before": ["<leader>", "a"],
+        "commands": ["vscode-harpoon.addEditor"]
+      },
+      {
+        "before": ["<leader>", "e"],
+        "commands": ["vscode-harpoon.editEditors"]
+      },
+      {
+        "before": ["<leader>", "p", "e"],
+        "commands": ["vscode-harpoon.editorQuickPick"]
+      },
+      {
+        "before": ["<leader>", "1"],
+        "commands": ["vscode-harpoon.gotoEditor1"]
+      },
+      {
+        "before": ["<leader>", "2"],
+        "commands": ["vscode-harpoon.gotoEditor2"]
+      },
+      {
+        "before": ["<leader>", "3"],
+        "commands": ["vscode-harpoon.gotoEditor3"]
+      },
+      {
+        "before": ["<leader>", "4"],
+        "commands": ["vscode-harpoon.gotoEditor4"]
+      },
+    ],
+
+    
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#002b36",
+    "statusBar.foreground": "#ffffff94"
+  }
+}
