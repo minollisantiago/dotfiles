@@ -1,6 +1,6 @@
 # My dotfiles
 
-#### Screenshots
+## Screenshots
 
 Nvim (LazyVim):
 ![lazyvim_home](images/Captura_2.PNG)
