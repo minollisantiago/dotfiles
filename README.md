@@ -1,6 +1,15 @@
 # My dotfiles
-![lazyvim_ui](images/Captura_1.PNG)
+
+#### Screenshots
+
+Nvim (LazyVim):
 ![lazyvim_home](images/Captura_2.PNG)
+![lazyvim_ui](images/Captura_1.PNG)
+![Powershell](images/Captura_4.PNG)
+
+Terminal with terminal icons and firacode Mono:
+![Powershell](images/Captura_3.PNG)
+
 
 Dotfiles for: 
 - **neovim** with [lazyvim](https://www.lazyvim.org/)
@@ -10,6 +19,10 @@ Dotfiles for:
 Themes im using for neovim and vscode: 
 - **nvim:** [Kanagawa](https://github.com/rebelot/kanagawa.nvim)
 - **vscode:** [Solarized-Osaka for vscode](https://github.com/sherloach/vscode-theme-solarized-osaka). Original by Devaslife [Solarized-osaka for nvim](https://github.com/craftzdog/solarized-osaka.nvim)
+
+Nerd font im using: 
+- **Terminal/nvim and vscode**: [Fira Code Mono](https://github.com/tonsky/FiraCode)
+- **Installation:** [Oh-my-posh fonts install docs](https://ohmyposh.dev/docs/installation/fonts)
 
 ## Dotfiles references
 
