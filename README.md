@@ -128,6 +128,7 @@ Commands can be combined with motion to have enhanced effects:
 - **leader+i (number) -->** open the ith editor previously stored 
 
 ## Some tricks
+- **d-i-W -->** delete all words until hitting whitespace on both sides (right and left).
 - **ctrl-d and ctrl-u -->** changed settings to add zz to each command, this centers the cursor and so the code "travels" up and down with the cursor always fixed at the center of the screen. **Best way to move vertically**
 - **trick:** select a number of lines with visual mode, then press shift-i to trigger insert mode on all of them
 - **%:** standing on a character, sends the cursor to the same type of character, works well with visualmode to select code between {[]}
