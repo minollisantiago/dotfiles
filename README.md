@@ -10,17 +10,19 @@ Nvim (LazyVim):
 Terminal with terminal icons and firacode Mono:
 ![Powershell](images/Captura_3.PNG)
 
+Dotfiles for:
 
-Dotfiles for: 
 - **neovim** with [lazyvim](https://www.lazyvim.org/)
-- **powershell** with [oh-my-posh](https://ohmyposh.dev/) 
+- **powershell** with [oh-my-posh](https://ohmyposh.dev/)
 - **vscode** vim motions and custom keybinds + other settings
 
-Themes im using for neovim and vscode: 
+Themes im using for neovim and vscode:
+
 - **nvim:** [Kanagawa](https://github.com/rebelot/kanagawa.nvim)
 - **vscode:** [Solarized-Osaka for vscode](https://github.com/sherloach/vscode-theme-solarized-osaka). Original by Devaslife [Solarized-osaka for nvim](https://github.com/craftzdog/solarized-osaka.nvim)
 
-Nerd font im using: 
+Nerd font im using:
+
 - **Terminal/nvim and vscode**: [Fira Code Mono](https://github.com/tonsky/FiraCode)
 - **Installation:** [Oh-my-posh fonts install docs](https://ohmyposh.dev/docs/installation/fonts)
 
@@ -28,19 +30,23 @@ Nerd font im using:
 
 In descending order of relevance for my setup:
 
-##### Powershell: oh-my-posh, nvim, nodejs, terminal-icons install and some other initial configurations, by [Devaslife](https://www.youtube.com/@devaslife):
+##### Powershell: oh-my-posh, nvim, nodejs, terminal-icons install and some other initial configurations, by [Devaslife](https://www.youtube.com/@devaslife)
+
 [![Video](https://img.youtube.com/vi/5-aK2_WwrmM/maxresdefault.jpg)](https://www.youtube.com/watch?v=5-aK2_WwrmM&t=1771s)
 
-##### Nvim setup with lazy: LazyVim config, keymaps, telescope, theme setup and other general configurations, by [Devaslife](https://www.youtube.com/@devaslife).
+##### Nvim setup with lazy: LazyVim config, keymaps, telescope, theme setup and other general configurations, by [Devaslife](https://www.youtube.com/@devaslife)
+
 [![Video](https://img.youtube.com/vi/fFHlfbKVi30/maxresdefault.jpg)](https://www.youtube.com/watch?v=fFHlfbKVi30&t=2238s)
 
-##### Zero to IDE with lazyVim by [Elijah Manor](https://www.youtube.com/@ElijahManor):
+##### Zero to IDE with lazyVim by [Elijah Manor](https://www.youtube.com/@ElijahManor)
+
 [![Video](https://img.youtube.com/vi/N93cTbtLCIM/maxresdefault.jpg)](https://www.youtube.com/watch?v=N93cTbtLCIM&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=19)
 
-##### Oh-my-posh for powershell: intro by [HolaMundo](https://www.youtube.com/@HolaMundoDev):
+##### Oh-my-posh for powershell: intro by [HolaMundo](https://www.youtube.com/@HolaMundoDev)
+
 [![Video](https://img.youtube.com/vi/6SGIFVJ5Izs/maxresdefault.jpg)](https://www.youtube.com/watch?v=6SGIFVJ5Izs)
 
-## Vim motions i use (some):
+## Vim motions i use (some)
 
 Wrote this up when i was practicing the motions to help me remember them. Some of them are vscode only, as i started first learning motions in vscode and later transitioned to neovim.
 
@@ -53,17 +59,19 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 - **zz =** centers the cursor at the middle of the screen
 - **/{word} =** Search for {word} then press enter and jump through all matches with n (down) or shift-n (up)
 - **?{word} =** Search for {word} backwards, then press enter and invert the search done with /
-- **{*} while highlighting a word =** "saves" the highlighted word, then press n or shift-n to jump through all matches (up/down)
+- **{\*} while highlighting a word =** "saves" the highlighted word, then press n or shift-n to jump through all matches (up/down)
 - **:{number} =** moves the cursor to line {number}
 
 ### Horizontal motions
 
 - **hjkl: h // l =** to move left/right
-- **w / b =** moves to the next/previous word 
+- **w / b =** moves to the beginning of the next/previous word
+- **e =** moves the cursor to the end of the next word
+- **E =** moves the cursor to the next non-alphanumeric character (commas, parenthesis, etc)
 - **f+{character} =** takes you to that character inside a line (included)
 - **t+{character} =** takes you to that character inside a line (not included)
 - **; // , after f/t+{character} =** jump forward/backwards between the selected {character}
-- **0 =** takes you to the beginning of the line 
+- **0 =** takes you to the beginning of the line
 - **$ =** takes you to the end of the line
 
 ### Commands/Actions
@@ -78,7 +86,7 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 - **yy =** copy (yank) line to clipboard
 - **p =** paste. If we have a complete line on the clipboard, paste line below the cursor
 - **shift-p =** paste. If we have a complete line on the clipboard, paste line above the cursor
-- **u =** undo last 
+- **u =** undo last
 - **ctrl+r =** redo last
 - **o =** adds a newline below and moves to insert mode
 - **O =** adds a newline above and moves to insert mode
@@ -108,6 +116,7 @@ Commands can be combined with motion to have enhanced effects:
 - **tab // shift-tab [insert or visual mode] =** indent line, if you combine with movement you can indent blocks
 
 ### File tree
+
 - **ctrl-e =** open/close file tree
 - **jk =** Move down/up inside the file tree
 - **h =** Close folder (if opened)
@@ -117,17 +126,20 @@ Commands can be combined with motion to have enhanced effects:
 - **ctrl+shift+n =** Create new folder inside current location on the tree
 
 ### Console
+
 - **ctrl+j =** Open/close console
 - **ctrl+shift+j =** Open new console
 - **ctrl+shift+q =** Terminate console
 - **ctrl+shift+(a/b) =** Move up/down between running consoles
 
 ### Harpoon
+
 - **leader+a =** add file to the harpoon editor list
 - **leader+e =** open harpoon editor filelist, editable
-- **leader+i (number) =** open the ith editor previously stored 
+- **leader+i (number) =** open the ith editor previously stored
 
 ## Some tricks
+
 - **d-i-W =** delete all words until hitting whitespace on both sides (right and left), applies for all commands (c, v, d).
 - **d-i-q =** delete all contents inside quotes, applies for all commands (c, v, d).
 - **dii =** delete all contents at identation level, applies for all commands (c, v, d).
@@ -137,22 +149,28 @@ Commands can be combined with motion to have enhanced effects:
 - **some combos:**
   - **d + t + {character} =** delete line up to {character}
   - **c + t + {character} =** delete up to {character} and go into insert mode
-  - **press * to select all matching words then type: :%s//new_word+enter =** replace all occurrences with new_word 
+  - **press \* to select all matching words then type: :%s//new_word+enter =** replace all occurrences with new_word
   - **shift + V [Visual mode line] + select lines + tab/shift+tab =** indents a block of code
   - **ctrl + shift + v =** open markdown server
 
 ## Resources (motions)
-##### Vim motions intro by The Primeagen:
+
+##### Vim motions intro by The Primeagen
+
 [![Video](https://img.youtube.com/vi/X6AR2RMB5tE/maxresdefault.jpg)](https://www.youtube.com/watch?v=X6AR2RMB5tE&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=3&pp=gAQBiAQB)
 
-##### Vim motions - horizontal by the Primeagen:
+##### Vim motions - horizontal by the Primeagen
+
 [![Video](https://img.youtube.com/vi/5JGVtttuDQA/maxresdefault.jpg)](https://www.youtube.com/watch?v=5JGVtttuDQA&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=4&t=349s)
 
-##### Vim motions - vertical by the Primeagen:
+##### Vim motions - vertical by the Primeagen
+
 [![Video](https://img.youtube.com/vi/KfENDDEpCsI/maxresdefault.jpg)](https://www.youtube.com/watch?v=KfENDDEpCsI&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=5)
 
-##### Vim motions for vscode by MelkeyDev, [settings.json and keybinds.json files for vscode](https://github.com/Melkeydev/vscode_bindings):
+##### Vim motions for vscode by MelkeyDev, [settings.json and keybinds.json files for vscode](https://github.com/Melkeydev/vscode_bindings)
+
 [![Video](https://img.youtube.com/vi/GST8we5uABo/maxresdefault.jpg)](https://www.youtube.com/watch?v=GST8we5uABo)
 
-##### Vim Tutorial by Ben Awad:
+##### Vim Tutorial by Ben Awad
+
 [![Video](https://img.youtube.com/vi/IiwGbcd8S7I/maxresdefault.jpg)](https://www.youtube.com/watch?v=IiwGbcd8S7I&list=PL4UMjyVQYX-EsTmFDgKK_3yld_xiFcRXO&index=31&t=2315s)
