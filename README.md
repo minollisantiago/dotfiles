@@ -174,3 +174,213 @@ Commands can be combined with motion to have enhanced effects:
 ##### Vim Tutorial by Ben Awad
 
 [![Video](https://img.youtube.com/vi/IiwGbcd8S7I/maxresdefault.jpg)](https://www.youtube.com/watch?v=IiwGbcd8S7I&list=PL4UMjyVQYX-EsTmFDgKK_3yld_xiFcRXO&index=31&t=2315s)
+
+
+# LLM Finetuning
+
+In this project, we will be finetuning a LLM using the Hugging Face framework and unsloth library.
+
+Certainly! Here's a summarized version of our conversation, focusing on the topics you mentioned. The content is formatted in Markdown so you can easily use it for a GitHub `README.md` file.
+
+---
+
+# How to setup WSL with GPU support
+
+This "guide" covers the installation and setup of WSL2 on a Windows machine, enabling GPU support, managing Linux distributions, installing Anaconda, and cloning a GitHub repository using SSH.
+
+## 1. Installing and Enabling WSL2 on Windows
+
+### Check if You Have WSL2 or WSL1
+
+To determine whether you have WSL1 or WSL2 installed:
+
+```bash
+wsl -l -v
+```
+
+The output will show the version of each installed distribution.
+
+### Install WSL2
+
+If WSL is not installed, you can install it using the following command in PowerShell:
+
+```powershell
+wsl --install
+```
+
+Set WSL2 as the default version:
+
+```powershell
+wsl --set-default-version 2
+```
+
+## 2. Enable Virtual Machine Platform and Virtualization
+
+### Enable Virtual Machine Platform
+
+Run the following command in PowerShell as Administrator:
+
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+### Enable Virtualization in BIOS
+
+1. Restart your computer and enter the BIOS/UEFI settings (usually by pressing `F2`, `F10`, `F12`, or `Delete` during startup).
+2. Find and enable the virtualization option (e.g., Intel VT-x, Intel Virtualization Technology, SVM Mode, or AMD-V).
+3. Save and exit the BIOS.
+
+## 3. Install a Custom Linux Version via Microsoft Store
+
+### Install from Microsoft Store
+
+1. Open the Microsoft Store and search for the Linux distribution you want to install.
+2. Install your preferred distribution.
+
+### Check Available Linux Distributions via Terminal
+
+To see a list of all available Linux distributions:
+
+```powershell
+wsl --list --online
+```
+
+## 4. Update Ubuntu Package List and Packages in WSL
+
+To update the package list and upgrade installed packages:
+
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+To perform a full upgrade:
+
+```bash
+sudo apt full-upgrade -y
+```
+
+## 5. Change the Default WSL Distribution
+
+If you have multiple distributions installed, you can set a default one:
+
+```bash
+wsl --set-default <DistributionName>
+```
+
+## 6. Start a WSL Distribution
+
+### Start the Default Distribution
+
+```powershell
+wsl
+```
+
+### Start a Specific Distribution
+
+```powershell
+wsl -d <DistributionName>
+```
+
+## 7. Access WSL Files from Windows
+
+WSL files can be accessed using a special path. Example of opening a file in Neovim:
+
+```powershell
+nvim \\wsl$\Ubuntu-24.04\home\your-username\file.txt
+```
+
+Replace `Ubuntu-24.04` and `your-username` with your actual distribution name and username.
+
+## 8. Set Up a Shortcut for Easy Access
+
+### Access WSL from PowerShell
+
+Add the following alias to your PowerShell profile (`$PROFILE`):
+
+```powershell
+Set-Alias wslhome "cd \\wsl$\Ubuntu-24.04\home\your-username"
+```
+
+### Access WSL from Bash
+
+Add this alias to your `~/.bashrc` file in WSL:
+
+```bash
+alias wslhome='cd /mnt/c/Users/YourWindowsUsername'
+```
+
+## 9. Set Up WSL2 to Support GPU and Verify
+
+### Install the Latest GPU Drivers
+
+- **For NVIDIA GPUs**: [NVIDIA CUDA on WSL](https://developer.nvidia.com/cuda/wsl)
+- **For AMD GPUs**: [AMD Drivers](https://www.amd.com/en/support)
+- **For Intel GPUs**: [Intel Graphics Drivers](https://www.intel.com/content/www/us/en/download-center/home.html)
+
+### Install CUDA Toolkit (for NVIDIA GPUs)
+
+```bash
+sudo apt-get update
+sudo apt-get -y install cuda
+```
+
+### Verify GPU Support
+
+```bash
+nvidia-smi
+```
+
+## 10. Install Anaconda/Miniconda on WSL and Verify
+
+### Install Miniconda
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh
+```
+
+### Install Anaconda
+
+```bash
+wget https://repo.anaconda.com/archive/Anaconda3-latest-Linux-x86_64.sh -O ~/anaconda.sh
+bash ~/anaconda.sh
+```
+
+### Initialize and Verify Installation
+
+After installation, either restart your terminal or manually source the configuration:
+
+```bash
+source ~/.bashrc
+```
+
+Verify Conda installation:
+
+```bash
+conda --version
+```
+
+## 11. Clone a GitHub Repository into WSL Using SSH
+
+### Set Up SSH Keys
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+Add your SSH key to your GitHub account, then test the connection:
+
+```bash
+ssh -T git@github.com
+```
+
+### Clone the Private Repository
+
+```bash
+git clone git@github.com:username/private-repo.git
+```
+
+Replace `username` and `private-repo` with your GitHub username and the repository name.
+
+---
