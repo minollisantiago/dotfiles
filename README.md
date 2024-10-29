@@ -431,6 +431,14 @@ and for fd:
 brew install fd
 ```
 
+**LazyGit** 🔥
+
+LazyGit is a terminal UI for git, very handy to use instead of the default git commands. You need to install it manually:
+
+```bash
+brew install lazygit
+```
+
 #### 10. Setup GitHub and Clone a Repository into WSL Using SSH
 
 ##### Add your GitHub credentials
