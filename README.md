@@ -316,6 +316,11 @@ After installing, you can verify that neovim is installed and working by running
 ```bash
 nvim --version
 ```
+Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
+
+```bash
+sudo apt install xclip
+```
 
 #### 8. Setup GitHub and Clone a Repository into WSL Using SSH
 
@@ -344,7 +349,7 @@ Add your SSH key to your GitHub account, then test the connection:
 ssh -T git@github.com
 ```
 
-##### Clone the Repository
+##### Clone a Private Repository (example)
 
 ```bash
 git clone git@github.com:username/private-repo.git
