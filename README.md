@@ -242,7 +242,7 @@ To install any distro, for example Ubuntu 24.04, run:
 ```powershell
 wsl --install -d Ubuntu-24.04
 ```
-#### 4. Update Ubuntu Package List and Packages in WSL
+##### Update Ubuntu Package List and Packages in WSL
 
 Once you have an instaled distro, to update the package list and upgrade installed packages:
 
@@ -257,29 +257,56 @@ To perform a full upgrade:
 sudo apt full-upgrade -y
 ```
 
-#### 5. Change the Default WSL Distribution
+##### Change the Default WSL Distribution
 
 If you have multiple distributions installed, you can set a default one:
 
 ```bash
 wsl --set-default <DistributionName>
 ```
+#### 4. Start the WSL Distribution
 
-#### 6. Start a WSL Distribution
-
-##### Start the Default Distribution
-
+You can start the default distribution with:
 ```powershell
 wsl
 ```
 
-#### Start a Specific Distribution
+To start a specific distribution:
 
 ```powershell
 wsl -d <DistributionName>
 ```
+#### 5. Setting up Powershell
 
-#### 7. Installing Neovim
+Im using powershell right now with oh-my-posh, might add configuration for other terminals later.
+
+To make sure powershell is installed in your Ubuntu distro:
+
+```bash
+# First enter WSL
+wsl
+
+# Then install PowerShell in Ubuntu
+# Add Microsoft package repository
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main" > /etc/apt/sources.list.d/microsoft.list'
+
+# Install PowerShell
+sudo apt-get update
+sudo apt-get install -y powershell
+
+# Launch PowerShell
+pwsh
+```
+What i do is adding the following to the end ofmy `~/.bashrc` file, to run powershell as default:
+
+```bash
+# Open powershell on startup
+pwsh
+```
+#### 6. Installing and Setting up Homebrew
+
+Homebrew is a package manager for Linux, similar to apt/apt-get. We will use it to install oh-my-posh, neovim and all our tools.
 
 ##### Step 1: Install Homebrew
 
@@ -306,6 +333,72 @@ You can verify that homebrew is installed and working by running:
 ```bash
 brew --version
 ```
+
+#### 7. Additional powershell tools
+
+##### z directory jumper
+Z tracks your most used directories, based on 'frecency'. This is done by storing your CD command history and ranking it over time.
+
+To install:
+
+```powershell
+Install-Module -Name z -Force
+```
+After installing, and after navigating a couple of times to your most frequent directories, you will be able to cd to them just typing `z` + some reference to the directory. Example: 
+
+```powershell
+z proj
+```
+Would be the equivalent of:
+```powershell
+cd home/your-username/project
+```
+##### PSReadLine
+This module adds autocompletion, commands history, syntax highlighting and other features to powershell. Pretty handy: 
+
+```powershell
+Install-Module -Name PSReadLine -AllowPrerelease -Force
+```
+##### Fuzzy finder
+From [the github page](https://github.com/junegunn/fzf):
+It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
+
+Works very similar to Telescope in neovim, but directly from the terminal, you can also inspect files with it and open them with neovim. Ive set some commands with aliases for powershell on the `user_profile.ps1` file on this repo.
+
+To install:
+
+```bash
+brew install fzf
+```
+
+#### 8. Installing and Configuring Oh-My-Posh
+
+Oh-My-Posh is a tool that allows you to use themes for your powershell prompt. Comes with icons and different templates to choose from. You can also create or customize your own.
+
+##### Step 1: Install Oh-My-Posh
+
+```bash
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+```
+##### Step 2: Configure Oh-My-Posh
+
+First install a nerd font using `oh-my-posh font install`, then add the following to your `~/.bashrc` or `~/.zshrc` file:
+
+```bash
+eval "$(oh-my-posh init bash --config ~/.poshthemes/my-theme.omp.json)"
+```
+Ive set my theme on the `user_profile.ps1` file on this repo. The theme itself is custom and is also on this repo `santiago.omp.json`.
+
+##### Step 3: Terminal Icons
+
+This module adds file type icons to your prompt, and to your terminal. To install:
+
+```powershell
+Install-Module -Name Terminal-Icons -Force
+```  
+
+#### 9. Installing Neovim
+
 ##### Step 3: Install Neovim
 
 ```bash
@@ -316,13 +409,29 @@ After installing, you can verify that neovim is installed and working by running
 ```bash
 nvim --version
 ```
+Make sure to have a Nerd Font installed (see the previous step), otherwise you will not be able to use the icons in the plugins that support them.
+
+##### Step 4: Additional requirements
+
+**Clipboard** 🔥
 Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
 
 ```bash
 sudo apt install xclip
 ```
+**Telescope** 🔥
+You need to install `ripgrep` and `fd` for Telescope to work properly. If `fd` is not installed, you wont be able to live grep, and if `ripgrep` is not installed, you will either not be able to search for files or (in my case) experience weird behaviour where all ignored files are tracked (node_modules, .git files, etc): 
 
-#### 8. Setup GitHub and Clone a Repository into WSL Using SSH
+```bash
+brew install ripgrep
+```
+and for fd:
+
+```bash
+brew install fd
+```
+
+#### 10. Setup GitHub and Clone a Repository into WSL Using SSH
 
 ##### Add your GitHub credentials
 
@@ -357,22 +466,7 @@ git clone git@github.com:username/private-repo.git
 
 Replace `username` and `private-repo` with your GitHub username and the repository name.
 
-#### 9. Installing and Configuring Oh-My-Posh
-
-##### Step 1: Install Oh-My-Posh
-
-```bash
-brew install jandedobbeleer/oh-my-posh/oh-my-posh
-```
-##### Step 2: Configure Oh-My-Posh
-
-First install a nerd font using `oh-my-posh font install`, then add the following to your `~/.bashrc` or `~/.zshrc` file:
-
-```bash
-eval "$(oh-my-posh init bash --config ~/.poshthemes/my-theme.omp.json)"
-```
-
-#### 10. Access WSL Files from Windows
+#### 11. Access WSL Files from Windows
 
 WSL files can be accessed using a special path. Example of opening a file in Neovim:
 
@@ -382,7 +476,7 @@ nvim \\wsl$\Ubuntu-24.04\home\your-username\file.txt
 
 Replace `Ubuntu-24.04` and `your-username` with your actual distribution name and username.
 
-#### 11. Set Up a Shortcut for Easy Access
+#### 12. Set Up a Shortcut for Easy Access
 
 ##### Access WSL from PowerShell
 
@@ -400,7 +494,7 @@ Add this alias to your `~/.bashrc` file in WSL:
 alias wslhome='cd /mnt/c/Users/YourWindowsUsername'
 ```
 
-#### 12. Set Up WSL2 to Support GPU and Verify
+#### 13. Set Up WSL2 to Support GPU and Verify
 
 If you are working with GPU acceleration, for ML.
 
@@ -423,7 +517,7 @@ sudo apt-get -y install cuda
 nvidia-smi
 ```
 
-#### 13. Install Anaconda/Miniconda on WSL and Verify
+#### 14. Install Anaconda/Miniconda on WSL and Verify
 
 ##### Download Miniconda/Anaconda
 
