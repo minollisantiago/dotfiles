@@ -50,7 +50,7 @@ In descending order of relevance for my setup:
 
 Wrote this up when i was practicing the motions to help me remember them. Some of them are vscode only, as i started first learning motions in vscode and later transitioned to neovim.
 
-### Vertical motions
+#### Vertical motions
 
 - **hjkl: j // k =** to move down/up
 - **{ // } =** go up/down a block of code
@@ -62,7 +62,7 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 - **{\*} while highlighting a word =** "saves" the highlighted word, then press n or shift-n to jump through all matches (up/down)
 - **:{number} =** moves the cursor to line {number}
 
-### Horizontal motions
+#### Horizontal motions
 
 - **hjkl: h // l =** to move left/right
 - **w / b =** moves to the beginning of the next/previous word
@@ -74,7 +74,7 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 - **0 =** takes you to the beginning of the line
 - **$ =** takes you to the end of the line
 
-### Commands/Actions
+#### Commands/Actions
 
 - **d =** delete, also copys to clipboard
 - **c =** change, deletes and moves to insert mode
@@ -102,7 +102,7 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 
 Commands can be combined with motion to have enhanced effects:
 
-### My navigation commands and keymaps
+#### My navigation commands and keymaps
 
 - **leader+q =** Close editor/file
 - **leader+w =** Save file
@@ -115,7 +115,7 @@ Commands can be combined with motion to have enhanced effects:
 - **ctrl+shift+n =** While on the editor, open new vscode project
 - **tab // shift-tab [insert or visual mode] =** indent line, if you combine with movement you can indent blocks
 
-### File tree
+#### File tree
 
 - **ctrl-e =** open/close file tree
 - **jk =** Move down/up inside the file tree
@@ -125,20 +125,20 @@ Commands can be combined with motion to have enhanced effects:
 - **ctrl-n =** Create and open new file
 - **ctrl+shift+n =** Create new folder inside current location on the tree
 
-### Console
+#### Console
 
 - **ctrl+j =** Open/close console
 - **ctrl+shift+j =** Open new console
 - **ctrl+shift+q =** Terminate console
 - **ctrl+shift+(a/b) =** Move up/down between running consoles
 
-### Harpoon
+#### Harpoon
 
 - **leader+a =** add file to the harpoon editor list
 - **leader+e =** open harpoon editor filelist, editable
 - **leader+i (number) =** open the ith editor previously stored
 
-## Some tricks
+## Some tricks (motions)
 
 - **d-i-W =** delete all words until hitting whitespace on both sides (right and left), applies for all commands (c, v, d).
 - **d-i-q =** delete all contents inside quotes, applies for all commands (c, v, d).
@@ -176,21 +176,13 @@ Commands can be combined with motion to have enhanced effects:
 [![Video](https://img.youtube.com/vi/IiwGbcd8S7I/maxresdefault.jpg)](https://www.youtube.com/watch?v=IiwGbcd8S7I&list=PL4UMjyVQYX-EsTmFDgKK_3yld_xiFcRXO&index=31&t=2315s)
 
 
-# LLM Finetuning
-
-In this project, we will be finetuning a LLM using the Hugging Face framework and unsloth library.
-
-Certainly! Here's a summarized version of our conversation, focusing on the topics you mentioned. The content is formatted in Markdown so you can easily use it for a GitHub `README.md` file.
-
----
-
-# How to setup WSL with GPU support
+## How to setup WSL with GPU support
 
 This "guide" covers the installation and setup of WSL2 on a Windows machine, enabling GPU support, managing Linux distributions, installing Anaconda, and cloning a GitHub repository using SSH.
 
-## 1. Installing and Enabling WSL2 on Windows
+#### 1. Installing and Enabling WSL2 on Windows
 
-### Check if You Have WSL2 or WSL1
+##### Check if You Have WSL2 or WSL1
 
 To determine whether you have WSL1 or WSL2 installed:
 
@@ -200,7 +192,7 @@ wsl -l -v
 
 The output will show the version of each installed distribution.
 
-### Install WSL2
+##### Install WSL2
 
 If WSL is not installed, you can install it using the following command in PowerShell:
 
@@ -214,9 +206,9 @@ Set WSL2 as the default version:
 wsl --set-default-version 2
 ```
 
-## 2. Enable Virtual Machine Platform and Virtualization
+#### 2. Enable Virtual Machine Platform and Virtualization
 
-### Enable Virtual Machine Platform
+##### Enable Virtual Machine Platform
 
 Run the following command in PowerShell as Administrator:
 
@@ -224,20 +216,20 @@ Run the following command in PowerShell as Administrator:
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
 
-### Enable Virtualization in BIOS
+##### Enable Virtualization in BIOS
 
 1. Restart your computer and enter the BIOS/UEFI settings (usually by pressing `F2`, `F10`, `F12`, or `Delete` during startup).
 2. Find and enable the virtualization option (e.g., Intel VT-x, Intel Virtualization Technology, SVM Mode, or AMD-V).
 3. Save and exit the BIOS.
 
-## 3. Install a Custom Linux Version via Microsoft Store
+#### 3. Install a Custom Linux Version via Microsoft Store
 
-### Install from Microsoft Store
+##### Install from Microsoft Store
 
 1. Open the Microsoft Store and search for the Linux distribution you want to install.
 2. Install your preferred distribution.
 
-### Check Available Linux Distributions via Terminal
+##### Check Available Linux Distributions via Terminal
 
 To see a list of all available Linux distributions:
 
@@ -245,9 +237,14 @@ To see a list of all available Linux distributions:
 wsl --list --online
 ```
 
-## 4. Update Ubuntu Package List and Packages in WSL
+To install any distro, for example Ubuntu 24.04, run:
 
-To update the package list and upgrade installed packages:
+```powershell
+wsl --install -d Ubuntu-24.04
+```
+#### 4. Update Ubuntu Package List and Packages in WSL
+
+Once you have an instaled distro, to update the package list and upgrade installed packages:
 
 ```bash
 sudo apt update
@@ -260,7 +257,7 @@ To perform a full upgrade:
 sudo apt full-upgrade -y
 ```
 
-## 5. Change the Default WSL Distribution
+#### 5. Change the Default WSL Distribution
 
 If you have multiple distributions installed, you can set a default one:
 
@@ -268,21 +265,109 @@ If you have multiple distributions installed, you can set a default one:
 wsl --set-default <DistributionName>
 ```
 
-## 6. Start a WSL Distribution
+#### 6. Start a WSL Distribution
 
-### Start the Default Distribution
+##### Start the Default Distribution
 
 ```powershell
 wsl
 ```
 
-### Start a Specific Distribution
+#### Start a Specific Distribution
 
 ```powershell
 wsl -d <DistributionName>
 ```
 
-## 7. Access WSL Files from Windows
+#### 7. Installing Neovim
+
+##### Step 1: Install Homebrew
+
+Run the following command in your WSL distro terminal to install homebrew:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+##### Step 2: Add Homebrew to Your Path
+
+After installation, you need to add Homebrew to your PATH environment variable. Open your shell configuration file (e.g., ~/.bashrc or ~/.zshrc) and add this line to the end of the file:
+
+```bash
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+Then reload the configuration:
+
+```bash
+source ~/.bashrc
+```
+You can verify that homebrew is installed and working by running:
+
+```bash
+brew --version
+```
+##### Step 3: Install Neovim
+
+```bash
+brew install neovim
+```
+After installing, you can verify that neovim is installed and working by running:
+
+```bash
+nvim --version
+```
+
+#### 8. Setup GitHub and Clone a Repository into WSL Using SSH
+
+##### Add your GitHub credentials
+
+```bash
+git config --global user.name "your_username"
+git config --global user.email "your_email@example.com"
+```
+
+##### Set Up SSH Keys
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+Press Enter to accept the default file location and name, and then enter a secure passphrase when prompted.
+
+Copy the SSH key to your clipboard:
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+Add your SSH key to your GitHub account, then test the connection:
+
+```bash
+ssh -T git@github.com
+```
+
+##### Clone the Repository
+
+```bash
+git clone git@github.com:username/private-repo.git
+```
+
+Replace `username` and `private-repo` with your GitHub username and the repository name.
+
+#### 9. Installing and Configuring Oh-My-Posh
+
+##### Step 1: Install Oh-My-Posh
+
+```bash
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+```
+##### Step 2: Configure Oh-My-Posh
+
+First install a nerd font using `oh-my-posh font install`, then add the following to your `~/.bashrc` or `~/.zshrc` file:
+
+```bash
+eval "$(oh-my-posh init bash --config ~/.poshthemes/my-theme.omp.json)"
+```
+
+#### 10. Access WSL Files from Windows
 
 WSL files can be accessed using a special path. Example of opening a file in Neovim:
 
@@ -292,9 +377,9 @@ nvim \\wsl$\Ubuntu-24.04\home\your-username\file.txt
 
 Replace `Ubuntu-24.04` and `your-username` with your actual distribution name and username.
 
-## 8. Set Up a Shortcut for Easy Access
+#### 11. Set Up a Shortcut for Easy Access
 
-### Access WSL from PowerShell
+##### Access WSL from PowerShell
 
 Add the following alias to your PowerShell profile (`$PROFILE`):
 
@@ -302,7 +387,7 @@ Add the following alias to your PowerShell profile (`$PROFILE`):
 Set-Alias wslhome "cd \\wsl$\Ubuntu-24.04\home\your-username"
 ```
 
-### Access WSL from Bash
+##### Access WSL from Bash
 
 Add this alias to your `~/.bashrc` file in WSL:
 
@@ -310,44 +395,61 @@ Add this alias to your `~/.bashrc` file in WSL:
 alias wslhome='cd /mnt/c/Users/YourWindowsUsername'
 ```
 
-## 9. Set Up WSL2 to Support GPU and Verify
+#### 12. Set Up WSL2 to Support GPU and Verify
 
-### Install the Latest GPU Drivers
+If you are working with GPU acceleration, for ML.
+
+##### Install the Latest GPU Drivers
 
 - **For NVIDIA GPUs**: [NVIDIA CUDA on WSL](https://developer.nvidia.com/cuda/wsl)
 - **For AMD GPUs**: [AMD Drivers](https://www.amd.com/en/support)
 - **For Intel GPUs**: [Intel Graphics Drivers](https://www.intel.com/content/www/us/en/download-center/home.html)
 
-### Install CUDA Toolkit (for NVIDIA GPUs)
+##### Install CUDA Toolkit (for NVIDIA GPUs)
 
 ```bash
 sudo apt-get update
 sudo apt-get -y install cuda
 ```
 
-### Verify GPU Support
+##### Verify GPU Support
 
 ```bash
 nvidia-smi
 ```
 
-## 10. Install Anaconda/Miniconda on WSL and Verify
+#### 13. Install Anaconda/Miniconda on WSL and Verify
 
-### Install Miniconda
+##### Install Miniconda
 
 ```bash
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-bash ~/miniconda.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-{version here}-Linux-x86_64.sh -O ~/miniconda.sh
 ```
 
-### Install Anaconda
+##### Install Anaconda
 
 ```bash
-wget https://repo.anaconda.com/archive/Anaconda3-latest-Linux-x86_64.sh -O ~/anaconda.sh
+wget https://repo.anaconda.com/archive/Anaconda3-{version here}-Linux-x86_64.sh -O ~/anaconda.sh
+```
+Check for specific versions on the anaconda website.
+
+To install miniconda/anaconda:
+
+```bash
 bash ~/anaconda.sh
 ```
+Once installed, you need to initialize:
 
-### Initialize and Verify Installation
+```bash
+~/anaconda3/bin/conda init
+```
+This command modifies your shell startup file (e.g., ~/.bashrc, ~/.zshrc) to include Conda in your PATH. Make sure to restart your terminal or manually source the configuration:
+
+```bash
+source ~/.bashrc
+```
+
+##### Initialize and Verify Installation
 
 After installation, either restart your terminal or manually source the configuration:
 
@@ -360,27 +462,4 @@ Verify Conda installation:
 ```bash
 conda --version
 ```
-
-## 11. Clone a GitHub Repository into WSL Using SSH
-
-### Set Up SSH Keys
-
-```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
-
-Add your SSH key to your GitHub account, then test the connection:
-
-```bash
-ssh -T git@github.com
-```
-
-### Clone the Private Repository
-
-```bash
-git clone git@github.com:username/private-repo.git
-```
-
-Replace `username` and `private-repo` with your GitHub username and the repository name.
-
 ---
