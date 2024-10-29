@@ -438,6 +438,7 @@ LazyGit is a terminal UI for git, very handy to use instead of the default git c
 ```bash
 brew install lazygit
 ```
+If you are having issues with lazygit GUI not showing when inside neovim (leader gg), ive found that closing neovim and running `lazygit` in the terminal fixes it the next time you open neovim.
 
 #### 10. Setup GitHub and Clone a Repository into WSL Using SSH
 
@@ -448,22 +449,61 @@ git config --global user.name "your_username"
 git config --global user.email "your_email@example.com"
 ```
 
-##### Set Up SSH Keys
+##### Set Up SSH Key
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 Press Enter to accept the default file location and name, and then enter a secure passphrase when prompted.
 
+##### Locate Your Keys
+After running the command, you should find your SSH keys in the ~/.ssh directory, example with default name:
+
+- Private key: `~/.ssh/id_rsa`
+- Public key: `~/.ssh/id_rsa.pub`
+
+##### Add SSH keys to your GitHub account
 Copy the SSH key to your clipboard:
 
 ```bash
 cat ~/.ssh/id_rsa.pub
 ```
-Add your SSH key to your GitHub account, then test the connection:
+Add your SSH key to your [GitHub account](https://github.com/settings/keys), then test the connection:
 
 ```bash
 ssh -T git@github.com
+```
+##### Add the SSH Key to the SSH Agent:
+
+You can use the ssh-agent to manage your keys more easily (recommended):
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+```
+
+You can also add this to your `~/.bashrc` or `~/.zshrc` file to automatically add the key to the agent, the first time you open a terminal after adding it, it will prompt you for the passphrase. **Note: remember to source your .bashrc/.zshrc file after adding it**.
+
+##### For windows
+For windows you only need to add the key to the ssh-agent **ONLY once**:
+
+```powershell
+ssh-add "path\to\the\keys\.ssh\id_rsa"
+```
+or, if they are located in your home directory:
+
+```powershell
+ssh-add $HOME\.ssh\id_rsa
+```
+The first time you open a terminal after adding it, it will prompt you for the passphrase. If you include the ssh-add command in your `user_profile.ps1` file, you will be prompted to enter the passphrase **every time you open a new terminal**, so dont do that.
+
+##### Line endings
+If you navigate to an existing local project via WSL, you should be able to commit changes directly to the remote repository, since Git tracks the repository settings (like the remote URL) within the .git folder in your project directory
+
+However, if when you run `git status`, Git is interpreting file changes due to different line-ending formats between Windows (CRLF) and WSL/Linux (LF), this can cause files to appear modified even if you haven't actually changed them. You can configure Git to handle line endings consistently across environments:
+
+```bash
+git config --global core.autocrlf false
 ```
 
 ##### Clone a Private Repository (example)
