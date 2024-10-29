@@ -425,20 +425,20 @@ nvidia-smi
 
 #### 13. Install Anaconda/Miniconda on WSL and Verify
 
-##### Install Miniconda
+##### Download Miniconda/Anaconda
 
+Miniconda:
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-{version here}-Linux-x86_64.sh -O ~/miniconda.sh
 ```
 
-##### Install Anaconda
-
+Anaconda:
 ```bash
 wget https://repo.anaconda.com/archive/Anaconda3-{version here}-Linux-x86_64.sh -O ~/anaconda.sh
 ```
-Check for specific versions on the anaconda website.
+Make sure to check for specific versions on the anaconda website.
 
-To install miniconda/anaconda:
+##### Install miniconda/anaconda:
 
 ```bash
 bash ~/anaconda.sh
@@ -453,16 +453,7 @@ This command modifies your shell startup file (e.g., ~/.bashrc, ~/.zshrc) to inc
 ```bash
 source ~/.bashrc
 ```
-
-##### Initialize and Verify Installation
-
-After installation, either restart your terminal or manually source the configuration:
-
-```bash
-source ~/.bashrc
-```
-
-Verify Conda installation:
+To verify Conda installation:
 
 ```bash
 conda --version
