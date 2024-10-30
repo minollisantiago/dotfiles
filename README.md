@@ -440,6 +440,12 @@ brew install lazygit
 ```
 If you are having issues with lazygit GUI not showing when inside neovim (leader gg), ive found that closing neovim and running `lazygit` in the terminal fixes it the next time you open neovim.
 
+Also, if you are having issues when pushing to SSH remotes using lazygit, you can ensure that Git (and lazygit as well) use the Windows `ssh.exe` executable by running:
+
+```bash
+git config --global core.sshCommand "C:\Windows\System32\OpenSSH\ssh.exe"
+```
+
 #### 10. Setup GitHub and Clone a Repository into WSL Using SSH
 
 ##### Add your GitHub credentials
@@ -482,10 +488,10 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```
 
-You can also add this to your `~/.bashrc` or `~/.zshrc` file to automatically add the key to the agent, the first time you open a terminal after adding it, it will prompt you for the passphrase. **Note: remember to source your .bashrc/.zshrc file after adding it**.
+You can also add this to your `~/.bashrc` or `~/.zshrc` file to automatically add the key to the agent, the first time you open a terminal each session, it will prompt you for the passphrase. **Note: remember to source your .bashrc/.zshrc file after adding it**.
 
 ##### For windows
-For windows you only need to add the key to the ssh-agent **ONLY once**:
+If you are using powershell, open a new terminal with admin privileges and add the key to the ssh-agent:
 
 ```powershell
 ssh-add "path\to\the\keys\.ssh\id_rsa"
@@ -495,7 +501,23 @@ or, if they are located in your home directory:
 ```powershell
 ssh-add $HOME\.ssh\id_rsa
 ```
-The first time you open a terminal after adding it, it will prompt you for the passphrase. If you include the ssh-add command in your `user_profile.ps1` file, you will be prompted to enter the passphrase **every time you open a new terminal**, so dont do that.
+
+You can add the following to your user_profile.ps1 (`$PROFILE`) file to automatically start the ssh-agent and add the key to the agent when you open a new terminal: 
+
+```powershell
+# Start ssh-agent if not already running
+if ((Get-Service -Name ssh-agent).Status -ne 'Running') {
+    Start-Service ssh-agent
+}
+
+# Add the key only if it's not already loaded
+ssh-add -l | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    ssh-add $HOME\.ssh\id_rsa  # Adjust path if necessary
+}
+```
+
+The first time you open a terminal on each session, it will prompt you for the passphrase.
 
 ##### Line endings
 If you navigate to an existing local project via WSL, you should be able to commit changes directly to the remote repository, since Git tracks the repository settings (like the remote URL) within the .git folder in your project directory
