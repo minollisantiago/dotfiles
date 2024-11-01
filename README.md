@@ -436,6 +436,10 @@ exec fish
 If you want to use the theme on this repo, you can add it to your `config.fish` file. First, download the theme file from the repo:
 
 ```bash
+# Create and navigate to the oh-my-posh folder
+mkdir -p ~/.config/oh-my-posh && cd ~/.config/oh-my-posh
+
+# Download the theme file
 curl -O https://raw.githubusercontent.com/minollisantiago/dotfiles/master/.config/oh-my-posh/santiago.omp.json
 ```
 Then add the following to your `~/.config/fish/config.fish` file:
@@ -495,7 +499,15 @@ alias g="git"
 alias ff="fuzz-preview"
 alias nff="fuzz-preview-nvim"
 ```
+You can also clone the `config.fish` file from this repo to have the aliases and functions automatically loaded when you open a new terminal:
 
+```bash
+# Navigate to the fish folder
+cd ~/.config/fish
+
+# Download the config.fish file
+curl -O https://raw.githubusercontent.com/minollisantiago/dotfiles/master/.config/fish/config.fish
+```
 ### 10. Installing Neovim
 
 ##### Step 1: Install Neovim
