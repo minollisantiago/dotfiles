@@ -810,7 +810,7 @@ sudo apt-get -y install cuda
 nvidia-smi
 ```
 
-### 15. Python Tools Im using on my WSL instance
+### 15. Python Tools Im using in WSL
 
 ##### UV (python package/project manager)
 
@@ -819,7 +819,44 @@ nvidia-smi
 ```bash
 brew install uv
 ```
-Anaconda is alright, but uv is faster and lighter, you can use it to replace pip, pip-tools, poetry, etc.
+To enable shell autocompletion for uvx, add this to `config.fish`:
+
+```bash
+uvx --generate-shell-completion fish | source
+```
+
+Anaconda is alright, but `uv` is faster and lighter, you can use it to replace pip, pip-tools, poetry, etc.
+
+One really cool feature of `uv` is that you can use it to install python versions, and create and switch between environments:
+
+```bash
+uv python install
+```
+For a specific version:
+
+```bash
+uv python install 3.12
+```
+For multiple versions:
+
+```bash
+uv python install 3.12 3.11 3.10
+```
+Once Python is installed, `uv` commands will use it automatically.
+
+To view all python available versions:
+
+```bash
+uv python list
+```
+Another cool feature is that you dont need to explicitly install a python interpreter, `uv` will install the latest version automatically when you run a command that requires it: 
+
+```bash
+uv venv
+```
+In this example, `uv` will install the latest python version and create a virtual environment with it.
+
+For more info, go to the [docs](https://docs.astral.sh/uv/guides/install-python/#automatic-python-downloads).
 
 ### 16. Install Anaconda/Miniconda on WSL and Verify
 
