@@ -15,16 +15,16 @@ keymap.set("n", "<leader>q", ":bd<Return>", opts)
 -- Harpoon
 harpoon:setup()
 keymap.set("n", "<leader>a", function()
-  harpoon:list():append()
+	harpoon:list():append()
 end)
 keymap.set("n", "<leader>e", function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
+	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 keymap.set("n", "<C-p>", function()
-  harpoon:list():next()
+	harpoon:list():next()
 end)
 keymap.set("n", "<C-o>", function()
-  harpoon:list():prev()
+	harpoon:list():prev()
 end)
 
 -- Navigation
@@ -45,3 +45,6 @@ keymap.set("x", "K", [[:m'<-2<CR>`<v`>]], opts)
 
 -- Toggle comment selection on visual line mode
 keymap.set("x", "<leader>c", [[:s/^/#/g<CR>]], opts)
+
+-----  OIL -----
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })

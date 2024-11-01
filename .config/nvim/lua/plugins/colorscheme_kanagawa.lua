@@ -4,7 +4,7 @@ return {
 	priority = 1000,
 	opts = {
 		transparent = true,
-		theme = "dragon",
+		theme = "wave",
 		overrides = function(colors)
 			local theme = colors.theme
 			return {
