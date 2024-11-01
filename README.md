@@ -466,7 +466,7 @@ To install:
 ```bash
 brew install fzf
 ```
-##### Additional fish utilities (including some aliases for fzf)
+##### Additional fish utilities/config (including some aliases for fzf)
 To add a preview to the fuzzy finder and some other quality of life shortcuts that i like to use, add the following to your `~/.config/fish/config.fish` file:
 
 ```bash
@@ -493,12 +493,51 @@ function ....
 end
 
 # Aliases
+alias g="git"
 alias vim="nvim"
 alias cc="clear"
-alias g="git"
+alias ll="ls -lat"
 alias ff="fuzz-preview"
 alias nff="fuzz-preview-nvim"
+
+# Theme: Kanagawa
+set -l foreground DCD7BA normal
+set -l selection 2D4F67 brcyan
+set -l comment 727169 brblack
+set -l red C34043 red
+set -l orange FF9E64 brred
+set -l yellow C0A36E yellow
+set -l green 76946A green
+set -l purple 957FB8 magenta
+set -l cyan 7AA89F cyan
+set -l pink D27E99 brmagenta
+
+# Syntax Highlighting Colors
+set -g fish_color_normal $foreground
+set -g fish_color_command $cyan
+set -g fish_color_keyword $pink
+set -g fish_color_quote $yellow
+set -g fish_color_redirection $foreground
+set -g fish_color_end $orange
+set -g fish_color_error $red
+set -g fish_color_param $purple
+set -g fish_color_comment $comment
+set -g fish_color_selection --background=$selection
+set -g fish_color_search_match --background=$selection
+set -g fish_color_operator $green
+set -g fish_color_escape $pink
+set -g fish_color_autosuggestion $comment
+
+# Completion Pager Colors
+set -g fish_pager_color_progress $comment
+set -g fish_pager_color_prefix $cyan
+set -g fish_pager_color_completion $foreground
+set -g fish_pager_color_description $comment
+
 ```
+The color theme im using is the [kanagawa theme for neovim](https://github.com/rebelot/kanagawa.nvim), the colors are taken from the fish specific colors file.
+
+##### Clone the `config.fish` file from this repo directly
 You can also clone the `config.fish` file from this repo to have the aliases and functions automatically loaded when you open a new terminal:
 
 ```bash
@@ -605,8 +644,6 @@ If you are using the windows terminal, to enable transparent background, ive inc
 :TransparentEnable
 ```
 
-
-
 ##### Step 5: start LazyVim
 
 Launch nvim and let LazyVim install the plugins and dependencies.
@@ -625,9 +662,17 @@ git config --global user.email "your_email@example.com"
 
 ##### Set Up SSH Key
 
+First, generate an SSH key, using your user.email (the one you used for git config on the previous step):
+
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+Or if your system does not support Ed25519:
 ```bash
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
+
 Press Enter to accept the default file location and name, and then enter a secure passphrase when prompted.
 
 ##### Locate Your Keys
