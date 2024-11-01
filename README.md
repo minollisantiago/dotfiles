@@ -180,7 +180,7 @@ Commands can be combined with motion to have enhanced effects:
 
 This "guide" covers the installation and setup of WSL2 on a Windows machine, enabling GPU support, managing Linux distributions, installing Anaconda, and cloning a GitHub repository using SSH.
 
-#### 1. Installing and Enabling WSL2 on Windows
+### 1. Installing and Enabling WSL2 on Windows
 
 ##### Check if You Have WSL2 or WSL1
 
@@ -206,7 +206,7 @@ Set WSL2 as the default version:
 wsl --set-default-version 2
 ```
 
-#### 2. Enable Virtual Machine Platform and Virtualization
+### 2. Enable Virtual Machine Platform and Virtualization
 
 ##### Enable Virtual Machine Platform
 
@@ -222,7 +222,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 2. Find and enable the virtualization option (e.g., Intel VT-x, Intel Virtualization Technology, SVM Mode, or AMD-V).
 3. Save and exit the BIOS.
 
-#### 3. Install a Custom Linux Version via Microsoft Store
+### 3. Install a Custom Linux Version via Microsoft Store
 
 ##### Install from Microsoft Store
 
@@ -271,7 +271,7 @@ If you have multiple distributions installed, you can set a default one:
 ```bash
 wsl --set-default <DistributionName>
 ```
-#### 4. Start the WSL Distribution
+### 4. Start the WSL Distribution
 
 You can start the default distribution with:
 ```powershell
@@ -284,7 +284,7 @@ To start a specific distribution:
 wsl -d <DistributionName>
 ```
 
-#### 5. Installing and Setting up Homebrew
+### 5. Installing and Setting up Homebrew
 
 Homebrew is a package manager for Linux, similar to apt/apt-get. We will use it to install oh-my-posh, neovim and all our tools.
 
@@ -313,7 +313,7 @@ You can verify that homebrew is installed and working by running:
 ```bash
 brew doctor
 ```
-#### 6. Terminal: Powershell
+### 6. Terminal: Powershell
 
 **Note: If you prefer a more stable and native Linux shell experience in WSL, skip to** [Fish](#7-terminal-fish).
 
@@ -369,19 +369,8 @@ This module adds autocompletion, commands history, syntax highlighting and other
 ```powershell
 Install-Module -Name PSReadLine -AllowPrerelease -Force
 ```
-##### Fuzzy finder
-From [the github page](https://github.com/junegunn/fzf):
-It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
 
-Works very similar to Telescope in neovim, but directly from the terminal, you can also inspect files with it and open them with neovim. Ive set some commands with aliases for powershell on the `user_profile.ps1` file on this repo.
-
-To install:
-
-```bash
-brew install fzf
-```
-
-#### 7. Terminal: Fish
+### 7. Terminal: Fish
 
 Powershell does not behave very well with WSL, you can come into all sort of issues that i'd prefer to avoid (like language servers not working in neovim, etc). So ive included a setup for Fish.
 
@@ -395,6 +384,8 @@ You need to make fish your default shell, to do this, first check where fish is 
 ```bash
 which fish
 ```
+##### Step 2: Make Fish your default shell
+
 Add fish to the list of allowed shells:
 
 ```bash
@@ -416,10 +407,7 @@ set -Ux fish_user_paths /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbre
 ```
 This should allow Fish to recognize Homebrew-installed binaries like `oh-my-posh` and `nvim`.
 
-##### Step 2: Fish plugins
-
-
-#### 8. Installing and Configuring Oh-My-Posh (fish)
+### 8. Installing and Configuring Oh-My-Posh (fish)
 
 Oh-My-Posh is a tool that allows you to use themes for your powershell prompt. Comes with icons and different templates to choose from. You can also create or customize your own.
 
@@ -461,7 +449,54 @@ Make sure to reload your config for the changes to take effect:
 exec fish
 ```
 
-#### 9. Installing Neovim
+### 9. Additional shell tools
+
+##### fzf Fuzzy finder
+From [the github page](https://github.com/junegunn/fzf):
+It's an interactive filter program for any kind of list; files, command history, processes, hostnames, bookmarks, git commits, etc. It implements a "fuzzy" matching algorithm, so you can quickly type in patterns with omitted characters and still get the results you want.
+
+Works very similar to Telescope in neovim, but directly from the terminal, you can also inspect files with it and open them with neovim. Ive set some commands with aliases for powershell on the `user_profile.ps1` file on this repo.
+
+To install:
+
+```bash
+brew install fzf
+```
+##### Additional fish utilities (including some aliases for fzf)
+To add a preview to the fuzzy finder and some other quality of life shortcuts that i like to use, add the following to your `~/.config/fish/config.fish` file:
+
+```bash
+# Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
+function fuzz-preview
+  fzf --preview="bat --color=always {}"
+end
+
+function fuzz-preview-nvim
+  nvim (fzf -m --preview="bat --color=always {}")
+end
+
+# Navigation shortcuts
+function ..
+  cd ..
+end
+
+function ...
+  cd ../..
+end
+
+function ....
+  cd ../../..
+end
+
+# Aliases
+alias vim="nvim"
+alias cc="clear"
+alias g="git"
+alias ff="fuzz-preview"
+alias nff="fuzz-preview-nvim"
+```
+
+### 10. Installing Neovim
 
 ##### Step 1: Install Neovim
 
@@ -475,25 +510,19 @@ nvim --version
 ```
 Make sure to have a Nerd Font installed (see the previous step), otherwise you will not be able to use the icons in the plugins that support them.
 
-##### Step 2: Install LazyVim
+##### Step 2: LazyVim requirements
 
-Clone the starter:
-```bash
-git clone https://github.com/LazyVim/starter ~/.config/nvim
+**C compiler** 🔥
+
+LazyVim requires a C compiler for [treesitter](https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#requirements), treesiter will check whether the following compilers are in %PATH%:
+
+```lua
+M.compilers = { vim.fn.getenv('CC'), "cc", "gcc", "clang", "cl", "zig" }
 ```
-Remove the .git folder, so you can add it to your own repo later:
+Im going with gcc, but i find zig works well too:
 
 ```bash
-rm -rf ~/.config/nvim/.git
-```
-
-##### Step 3: Additional requirements
-
-**Clipboard** 🔥
-Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
-
-```bash
-sudo apt install xclip
+brew install gcc
 ```
 **Telescope** 🔥
 You need to install `ripgrep` and `fd` for Telescope to work properly. If `fd` is not installed, you wont be able to live grep, and if `ripgrep` is not installed, you will either not be able to search for files or (in my case) experience weird behaviour where all ignored files are tracked (node_modules, .git files, etc): 
@@ -522,7 +551,58 @@ Also, if you are having issues when pushing to SSH remotes using lazygit, you ca
 git config --global core.sshCommand "C:\Windows\System32\OpenSSH\ssh.exe"
 ```
 
-#### 9. Setup GitHub and Clone a Repository into WSL Using SSH
+**Clipboard** 🔥
+Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
+
+```bash
+sudo apt install xclip
+```
+##### Step 3: Install LazyVim
+
+Clone the starter:
+```bash
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+```
+Remove the .git folder, so you can add it to your own repo later:
+
+```bash
+rm -rf ~/.config/nvim/.git
+```
+##### Step 4: LazyVim configuration
+
+Clone the repo: 
+
+```bash
+git clone https://github.com/minollisantiago/dotfiles.git ~/.config_
+```
+
+Copy the nvim folder contents to your ~/.config folder:
+
+```bash
+cp -r ~/.config_/.config/nvim/* ~/.config/nvim/
+```
+Remove the temporary folder:
+
+```bash
+rm -rf ~/.config_
+```
+
+If you are using the windows terminal, to enable transparent background, ive included the [xiyaowong/transparent.nvim](https://github.com/xiyaowong/transparent.nvim) plugin in the `plugins` folder, to activate it, you need to run (in neovim) the command:
+
+```bash
+:TransparentEnable
+```
+
+
+
+##### Step 5: start LazyVim
+
+Launch nvim and let LazyVim install the plugins and dependencies.
+
+```bash
+nvim
+```
+### 11. Setup GitHub and Clone a Repository into WSL Using SSH
 
 ##### Add your GitHub credentials
 
@@ -612,7 +692,7 @@ git clone git@github.com:username/private-repo.git
 
 Replace `username` and `private-repo` with your GitHub username and the repository name.
 
-#### 10. Access WSL Files from Windows
+### 12. Access WSL Files from Windows
 
 WSL files can be accessed using a special path. Example of opening a file in Neovim:
 
@@ -622,7 +702,7 @@ nvim \\wsl$\Ubuntu-24.04\home\your-username\file.txt
 
 Replace `Ubuntu-24.04` and `your-username` with your actual distribution name and username.
 
-#### 11. Set Up a Shortcut for Easy Access
+### 13. Set Up a Shortcut for Easy Access
 
 ##### Access WSL from PowerShell
 
@@ -640,7 +720,7 @@ Add this alias to your `~/.bashrc` file in WSL:
 alias wslhome='cd /mnt/c/Users/YourWindowsUsername'
 ```
 
-#### 12. Set Up WSL2 to Support GPU and Verify
+### 14. Set Up WSL2 to Support GPU and Verify
 
 If you are working with GPU acceleration, for ML.
 
@@ -663,7 +743,7 @@ sudo apt-get -y install cuda
 nvidia-smi
 ```
 
-#### 13. Install Anaconda/Miniconda on WSL and Verify
+### 15. Install Anaconda/Miniconda on WSL and Verify
 
 ##### Download Miniconda/Anaconda
 
