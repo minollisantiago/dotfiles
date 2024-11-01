@@ -408,6 +408,17 @@ chsh -s /path/to/bin/fish
 ```
 Restart the terminal and fish should be your default shell.
 
+**Note:** If you are having trouble with oh-my-posh or neovim not being recognized by fish, you can add the following to your `~/.config/fish/config.fish` file:
+
+```bash
+# Add Homebrew to PATH for Fish
+set -Ux fish_user_paths /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin $fish_user_paths
+```
+This should allow Fish to recognize Homebrew-installed binaries like `oh-my-posh` and `nvim`.
+
+##### Step 2: Fish plugins
+
+
 #### 8. Installing and Configuring Oh-My-Posh (fish)
 
 Oh-My-Posh is a tool that allows you to use themes for your powershell prompt. Comes with icons and different templates to choose from. You can also create or customize your own.
@@ -434,21 +445,21 @@ Once added, reload your config for the changes to take effect:
 ```bash
 exec fish
 ```
-
-Then add the following to your `~/.bashrc` or `~/.zshrc` file:
+If you want to use the theme on this repo, you can add it to your `config.fish` file. First, download the theme file from the repo:
 
 ```bash
-eval "$(oh-my-posh init bash --config ~/.poshthemes/my-theme.omp.json)"
+curl -O https://raw.githubusercontent.com/minollisantiago/dotfiles/master/.config/oh-my-posh/santiago.omp.json
 ```
-Ive set my theme on the `user_profile.ps1` file on this repo. The theme itself is custom and is also on this repo `santiago.omp.json`.
+Then add the following to your `~/.config/fish/config.fish` file:
 
-##### Step 3: Terminal Icons
+```bash
+oh-my-posh init fish --config ~/.config/oh-my-posh/santiago.omp.json | source
+```
+Make sure to reload your config for the changes to take effect:
 
-This module adds file type icons to your prompt, and to your terminal. To install:
-
-```powershell
-Install-Module -Name Terminal-Icons -Force
-```  
+```bash
+exec fish
+```
 
 #### 9. Installing Neovim
 
@@ -464,7 +475,19 @@ nvim --version
 ```
 Make sure to have a Nerd Font installed (see the previous step), otherwise you will not be able to use the icons in the plugins that support them.
 
-##### Step 2: Additional requirements
+##### Step 2: Install LazyVim
+
+Clone the starter:
+```bash
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+```
+Remove the .git folder, so you can add it to your own repo later:
+
+```bash
+rm -rf ~/.config/nvim/.git
+```
+
+##### Step 3: Additional requirements
 
 **Clipboard** 🔥
 Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
