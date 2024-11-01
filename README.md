@@ -242,13 +242,20 @@ To install any distro, for example Ubuntu 24.04, run:
 ```powershell
 wsl --install -d Ubuntu-24.04
 ```
+To set WSL 2 as the default version:
+
+```powershell
+wsl --set-default-version 2
+```
+
 ##### Update Ubuntu Package List and Packages in WSL
 
 Once you have an instaled distro, to update the package list and upgrade installed packages:
 
 ```bash
-sudo apt update
-sudo apt upgrade -y
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y build-essential
 ```
 
 To perform a full upgrade:
@@ -276,35 +283,8 @@ To start a specific distribution:
 ```powershell
 wsl -d <DistributionName>
 ```
-#### 5. Setting up Powershell
 
-Im using powershell right now with oh-my-posh, might add configuration for other terminals later.
-
-To make sure powershell is installed in your Ubuntu distro:
-
-```bash
-# First enter WSL
-wsl
-
-# Then install PowerShell in Ubuntu
-# Add Microsoft package repository
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main" > /etc/apt/sources.list.d/microsoft.list'
-
-# Install PowerShell
-sudo apt-get update
-sudo apt-get install -y powershell
-
-# Launch PowerShell
-pwsh
-```
-What i do is adding the following to the end ofmy `~/.bashrc` file, to run powershell as default:
-
-```bash
-# Open powershell on startup
-pwsh
-```
-#### 6. Installing and Setting up Homebrew
+#### 5. Installing and Setting up Homebrew
 
 Homebrew is a package manager for Linux, similar to apt/apt-get. We will use it to install oh-my-posh, neovim and all our tools.
 
@@ -331,10 +311,40 @@ source ~/.bashrc
 You can verify that homebrew is installed and working by running:
 
 ```bash
-brew --version
+brew doctor
 ```
+#### 6. Terminal: Powershell
 
-#### 7. Additional powershell tools
+**Note: If you prefer a more stable and native Linux shell experience in WSL, skip to** [Fish](#7-terminal-fish).
+
+
+I'm using powershell right now with oh-my-posh for windows, if you want to use it on WSL, you can follow the steps below:
+
+To make sure powershell is installed in your Ubuntu distro:
+
+```bash
+# First enter WSL
+wsl
+
+# Then install PowerShell in Ubuntu
+# Add Microsoft package repository
+curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-bullseye-prod bullseye main" > /etc/apt/sources.list.d/microsoft.list'
+
+# Install PowerShell
+sudo apt-get update
+sudo apt-get install -y powershell
+
+# Launch PowerShell
+pwsh
+```
+What i do is adding the following to the end ofmy `~/.bashrc` file, to run powershell as default:
+
+```bash
+# Open powershell on startup
+pwsh
+```
+##### Useful Powershell tools
 
 ##### z directory jumper
 Z tracks your most used directories, based on 'frecency'. This is done by storing your CD command history and ranking it over time.
@@ -371,7 +381,34 @@ To install:
 brew install fzf
 ```
 
-#### 8. Installing and Configuring Oh-My-Posh
+#### 7. Terminal: Fish
+
+Powershell does not behave very well with WSL, you can come into all sort of issues that i'd prefer to avoid (like language servers not working in neovim, etc). So ive included a setup for Fish.
+
+##### Step 1: Install Fish
+
+```bash
+brew install fish
+```
+You need to make fish your default shell, to do this, first check where fish is located:
+
+```bash
+which fish
+```
+Add fish to the list of allowed shells:
+
+```bash
+echo /path/to/bin/fish | sudo tee -a /etc/shells
+```
+
+Then make fish your default shell:
+
+```bash
+chsh -s /path/to/bin/fish
+```
+Restart the terminal and fish should be your default shell.
+
+#### 8. Installing and Configuring Oh-My-Posh (fish)
 
 Oh-My-Posh is a tool that allows you to use themes for your powershell prompt. Comes with icons and different templates to choose from. You can also create or customize your own.
 
@@ -382,7 +419,23 @@ brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ```
 ##### Step 2: Configure Oh-My-Posh
 
-First install a nerd font using `oh-my-posh font install`, then add the following to your `~/.bashrc` or `~/.zshrc` file:
+First install a nerd font using:
+
+```bash
+oh-my-posh font install
+```
+To change your promt, add the following snippet to your `~/.config/fish/config.fish` file: 
+
+```bash
+oh-my-posh init fish | source
+```
+Once added, reload your config for the changes to take effect:
+
+```bash
+exec fish
+```
+
+Then add the following to your `~/.bashrc` or `~/.zshrc` file:
 
 ```bash
 eval "$(oh-my-posh init bash --config ~/.poshthemes/my-theme.omp.json)"
@@ -399,10 +452,10 @@ Install-Module -Name Terminal-Icons -Force
 
 #### 9. Installing Neovim
 
-##### Step 3: Install Neovim
+##### Step 1: Install Neovim
 
 ```bash
-brew install neovim
+brew install nvim
 ```
 After installing, you can verify that neovim is installed and working by running:
 
@@ -411,7 +464,7 @@ nvim --version
 ```
 Make sure to have a Nerd Font installed (see the previous step), otherwise you will not be able to use the icons in the plugins that support them.
 
-##### Step 4: Additional requirements
+##### Step 2: Additional requirements
 
 **Clipboard** 🔥
 Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
@@ -446,7 +499,7 @@ Also, if you are having issues when pushing to SSH remotes using lazygit, you ca
 git config --global core.sshCommand "C:\Windows\System32\OpenSSH\ssh.exe"
 ```
 
-#### 10. Setup GitHub and Clone a Repository into WSL Using SSH
+#### 9. Setup GitHub and Clone a Repository into WSL Using SSH
 
 ##### Add your GitHub credentials
 
@@ -536,7 +589,7 @@ git clone git@github.com:username/private-repo.git
 
 Replace `username` and `private-repo` with your GitHub username and the repository name.
 
-#### 11. Access WSL Files from Windows
+#### 10. Access WSL Files from Windows
 
 WSL files can be accessed using a special path. Example of opening a file in Neovim:
 
@@ -546,7 +599,7 @@ nvim \\wsl$\Ubuntu-24.04\home\your-username\file.txt
 
 Replace `Ubuntu-24.04` and `your-username` with your actual distribution name and username.
 
-#### 12. Set Up a Shortcut for Easy Access
+#### 11. Set Up a Shortcut for Easy Access
 
 ##### Access WSL from PowerShell
 
@@ -564,7 +617,7 @@ Add this alias to your `~/.bashrc` file in WSL:
 alias wslhome='cd /mnt/c/Users/YourWindowsUsername'
 ```
 
-#### 13. Set Up WSL2 to Support GPU and Verify
+#### 12. Set Up WSL2 to Support GPU and Verify
 
 If you are working with GPU acceleration, for ML.
 
@@ -587,7 +640,7 @@ sudo apt-get -y install cuda
 nvidia-smi
 ```
 
-#### 14. Install Anaconda/Miniconda on WSL and Verify
+#### 13. Install Anaconda/Miniconda on WSL and Verify
 
 ##### Download Miniconda/Anaconda
 
@@ -623,3 +676,4 @@ To verify Conda installation:
 conda --version
 ```
 ---
+sudo desktop-file-install extra/linux/Alacritty.desktop
