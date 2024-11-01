@@ -6,6 +6,9 @@ if status is-interactive
     # Oh my posh config
     oh-my-posh init fish --config ~/.config/oh-my-posh/santiago.omp.json | source
 
+    # Python UVX shell completions
+    uvx --generate-shell-completion fish | source
+
     # Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
     function fuzz-preview
         fzf --preview="bat --color=always {}"

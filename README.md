@@ -608,6 +608,18 @@ Ive found that WSL does not support clipboard access out of the box, so you wont
 ```bash
 sudo apt install xclip
 ```
+**Node** 🔥
+To install all the LSPs for neovim, through `mason`, we need to install `node` (and `npm`) first.
+
+```bash
+brew install node
+```
+You can also install nvm to manage node versions:
+
+```bash
+brew install nvm
+```
+
 ##### Step 3: Install LazyVim
 
 Clone the starter:
@@ -643,14 +655,12 @@ If you are using the windows terminal, to enable transparent background, ive inc
 ```bash
 :TransparentEnable
 ```
-
-##### Step 5: start LazyVim
-
 Launch nvim and let LazyVim install the plugins and dependencies.
 
 ```bash
 nvim
 ```
+
 ### 11. Setup GitHub and Clone a Repository into WSL Using SSH
 
 ##### Add your GitHub credentials
@@ -800,7 +810,20 @@ sudo apt-get -y install cuda
 nvidia-smi
 ```
 
-### 15. Install Anaconda/Miniconda on WSL and Verify
+### 15. Python Tools Im using on my WSL instance
+
+##### UV (python package/project manager)
+
+[From their page](https://docs.astral.sh/uv/), uv is an extremely fast python package and project manager, written in Rust.
+
+```bash
+brew install uv
+```
+Anaconda is alright, but uv is faster and lighter, you can use it to replace pip, pip-tools, poetry, etc.
+
+### 16. Install Anaconda/Miniconda on WSL and Verify
+
+If you need anaconda instead of [UV](#uv-python-package-project-manager) or [poetry](https://python-poetry.org/), perhaps due to issues with CUDA/pytorch, etc. You can install anaconda as an alternative:
 
 ##### Download Miniconda/Anaconda
 
