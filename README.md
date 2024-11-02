@@ -608,7 +608,7 @@ Ive found that WSL does not support clipboard access out of the box, so you wont
 ```bash
 sudo apt install xclip
 ```
-**Node** 🔥
+**Node/nvm** 🔥
 To install all the LSPs for neovim, through `mason`, we need to install `node` (and `npm`) first.
 
 ```bash
@@ -617,8 +617,77 @@ brew install node
 You can also install nvm to manage node versions:
 
 ```bash
-brew install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
+
+For fish shell users, add this to your `~/.config/fish/config.fish`:
+
+```bash
+# NVM setup
+function nvm
+    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+end
+
+# Load nvm on terminal start
+if test -f ~/.nvm/nvm.sh
+    set -gx NVM_DIR ~/.nvm
+    bass source ~/.nvm/nvm.sh --no-use
+
+    # If you have a default node version, load it
+    nvm use default
+end
+```
+
+Note: You'll need to install the `bass` plugin first to use nvm with fish:
+
+```bash
+brew install fisher
+fisher install edc/bass
+```
+Nvm usefull commands: 
+
+```bash
+# List available Node.js versions
+nvm ls-remote
+
+# Install a specific version
+nvm install 22.11.0  # Example version
+
+# Switch to a specific version
+nvm use 22.11.0
+
+# Set a default version
+nvm alias default 22.11.0
+
+# List installed versions
+nvm ls
+
+# Install latest LTS version
+nvm install --lts
+
+# Use the latest LTS version
+nvm use --lts
+```
+
+**Note:** homebrew installs the latest node version, use nvm to install a stable version and then set it as the default:
+
+```bash
+nvm install 22.11.0
+nvm alias default 22.11.0
+```
+
+Additionally, after installing node, you need to install the neovim npm package globally for the node provider to work:
+
+```bash
+npm install neovim
+```
+Installing it:
+
+- Won't modify your existing Neovim installation
+- Won't change any of your configurations
+- Only adds support for Node.js-based features in Neovim
+
+The package just provides the necessary bindings for Neovim to interact with Node.js.
 
 ##### Step 3: Install LazyVim
 
