@@ -688,30 +688,65 @@ Press Enter to accept the default file location and name, and then enter a secur
 ##### Locate Your Keys
 After running the command, you should find your SSH keys in the ~/.ssh directory, example with default name:
 
-- Private key: `~/.ssh/id_rsa`
-- Public key: `~/.ssh/id_rsa.pub`
+- Private key: `~/.ssh/id_ed25519`
+- Public key: `~/.ssh/id_ed25519.pub`
 
 ##### Add SSH keys to your GitHub account
 Copy the SSH key to your clipboard:
 
 ```bash
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_ed25519.pub
 ```
 Add your SSH key to your [GitHub account](https://github.com/settings/keys), then test the connection:
 
 ```bash
 ssh -T git@github.com
 ```
+The first time you run this command, it will prompt you for the passphrase after selecting "yes".
+
 ##### Add the SSH Key to the SSH Agent:
 
-You can use the ssh-agent to manage your keys more easily (recommended):
+You can use the ssh-agent to manage your keys more easily (recommended).
+
+##### For fish
+
+Add the following to your `~/.config/fish/config.fish` file:
+
+```bash
+# Start SSH agent and add key
+if not ps -ef | grep -v grep | grep ssh-agent > /dev/null
+    eval (ssh-agent -c)
+    set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+    set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+end
+
+if test -f ~/.ssh/id_ed25519
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
+else if test -f ~/.ssh/id_rsa
+    ssh-add ~/.ssh/id_rsa 2>/dev/null
+end
+```
+
+This code will:
+- Check if ssh-agent is already running
+- If not, start it and set the environment variables
+- Try to add your ED25519 key first (preferred), falling back to RSA if ED25519 isn't found
+- Suppress any error messages if the key is already added
+
+After adding this, restart your terminal or source your config file:
+
+```bash
+exec fish
+```
+**Note:** The first time you open a terminal each session, it will prompt you for the passphrase.
+
+##### For bash/zsh
+You can also add this to your `~/.bashrc` or `~/.zshrc` file to automatically add the key to the agent. **Note: remember to source your .bashrc/.zshrc file after adding it**.
 
 ```bash
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_ed25519
 ```
-
-You can also add this to your `~/.bashrc` or `~/.zshrc` file to automatically add the key to the agent, the first time you open a terminal each session, it will prompt you for the passphrase. **Note: remember to source your .bashrc/.zshrc file after adding it**.
 
 ##### For windows
 If you are using powershell, open a new terminal with admin privileges and add the key to the ssh-agent:
@@ -758,6 +793,15 @@ git clone git@github.com:username/private-repo.git
 ```
 
 Replace `username` and `private-repo` with your GitHub username and the repository name.
+
+##### Check project remote (and change from HTTPS to SSH)
+
+If you cloned the repository using HTTPS, you can change it to SSH:
+
+```bash
+git remote -v
+git remote set-url origin git@github.com:username/repo-name.git
+```
 
 ### 12. Access WSL Files from Windows
 
