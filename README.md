@@ -611,10 +611,7 @@ sudo apt install xclip
 **Node/nvm** 🔥
 To install all the LSPs for neovim, through `mason`, we need to install `node` (and `npm`) first.
 
-```bash
-brew install node
-```
-You can also install nvm to manage node versions:
+You can install `nvm` first, to manage node versions:
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -679,7 +676,7 @@ nvm alias default 22.11.0
 Additionally, after installing node, you need to install the neovim npm package globally for the node provider to work:
 
 ```bash
-npm install neovim
+npm install -g neovim
 ```
 Installing it:
 
