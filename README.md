@@ -966,7 +966,7 @@ uv venv
 ```
 In this example, `uv` will install the latest python version and create a virtual environment with it.
 
-For more info, go to the [docs](https://docs.astral.sh/uv/guides/install-python/#automatic-python-downloads).
+For more info on how to set-up a python project with `uv`, go to the [docs](https://docs.astral.sh/uv/guides/install-python/#automatic-python-downloads).
 
 ### 16. Install Anaconda/Miniconda on WSL and Verify
 
