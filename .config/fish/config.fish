@@ -35,6 +35,21 @@ if status is-interactive
     #zoxide directory jumper
     zoxide init fish | source
 
+    # Function to activate Python uv venv without changing directory
+    function activate-venv
+        if test -n "$argv[1]"
+            set -l venv_path "$HOME/projects/$argv[1]/.venv/bin/activate.fish"
+            if test -f $venv_path
+                source $venv_path
+            else
+                echo "Virtual environment not found at: $venv_path"
+                echo "Make sure the project exists and has a virtual environment"
+            end
+        else
+            echo "Please provide a project name"
+        end
+    end
+
     # Navigation shortcuts
     function ..
         cd ..
@@ -54,6 +69,7 @@ if status is-interactive
     alias cc="clear"
     alias ll="ls -lat"
     alias ff="fuzz-preview"
+    alias vv="activate-venv"
     alias nff="fuzz-preview-nvim"
 
     # Theme: Kanagawa

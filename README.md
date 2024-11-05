@@ -994,6 +994,28 @@ In this example, `uv` will install the latest python version and create a virtua
 
 For more info on how to set-up a python project with `uv`, go to the [docs](https://docs.astral.sh/uv/guides/install-python/#automatic-python-downloads).
 
+##### UV venv activation alias
+I've added a function to activate a uv `venv` without changing directory, for any CLI apps i may have, ive included it in the `config.fish` file on this repo:
+
+```bash
+# Function to activate Python uv venv without changing directory
+function activate-venv
+    if test -n "$argv[1]"
+        set -l venv_path "$HOME/projects/$argv[1]/.venv/bin/activate.fish"
+        if test -f $venv_path
+            source $venv_path
+        else
+            echo "Virtual environment not found at: $venv_path"
+            echo "Make sure the project exists and has a virtual environment"
+        end
+    else
+        echo "Please provide a project name"
+    end
+end
+```
+
+I include all my projects in the `~/projects` folder, so i can activate their virtual environments with the `activate-venv` function and make use of their CLI tools from anywhere.
+
 ### 16. Install Anaconda/Miniconda on WSL and Verify
 
 If you need anaconda instead of [UV](#uv-python-package-project-manager) or [poetry](https://python-poetry.org/), perhaps due to issues with CUDA/pytorch, etc. You can install anaconda as an alternative:
