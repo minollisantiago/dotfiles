@@ -466,6 +466,32 @@ To install:
 ```bash
 brew install fzf
 ```
+
+##### zoxide
+[Zoxide](https://github.com/ajeetdsouza/zoxide) is a fast cd command that learns your habits.
+
+To install:
+
+```bash
+brew install zoxide
+```
+
+After installing, you can add the following to your `~/.config/fish/config.fish` file to enable zoxide:
+
+```bash
+# Add zoxide to PATH
+zoxide init fish | source
+```
+Very simple to use, you just need to cd to a directory once to let zoxide learn your habits, and then you can use the `z` command to navigate to your most used directories, just type `z` + some reference to the directory you want to navigate to. Example:
+
+```bash
+z proj
+```
+Would be the equivalent of, for example:
+```bash
+cd ~/projects
+```
+
 ##### Additional fish utilities/config (including some aliases for fzf)
 To add a preview to the fuzzy finder and some other quality of life shortcuts that i like to use, add the following to your `~/.config/fish/config.fish` file:
 
