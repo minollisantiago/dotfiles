@@ -9,19 +9,10 @@ if status is-interactive
     # Python UVX shell completions
     uvx --generate-shell-completion fish | source
 
-    # NVM setup
-    function nvm
-        bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
-    end
-
-    # Load nvm on terminal start
-    if test -f ~/.nvm/nvm.sh
-        set -gx NVM_DIR ~/.nvm
-        bass source ~/.nvm/nvm.sh --no-use
-
-        # If you have a default node version, load it
-        nvm use default
-    end
+    # NVM setup (nvm.fish)
+    set -gx nvm_default_version "lts"
+    set -gx nvm_mirror "https://nodejs.org/dist"
+    set -gx nvm_default_packages "npm" "pnpm" "yarn"
 
     # Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
     function fuzz-preview

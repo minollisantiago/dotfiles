@@ -643,60 +643,52 @@ You can install `nvm` first, to manage node versions:
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
-For fish shell users, add this to your `~/.config/fish/config.fish`:
+For `nvm` to work with fish, we are using `nvm.fish` instead of the default `nvm.sh`, [here is the repo](https://github.com/jorgebucaran/nvm.fish/tree/main).
 
-```bash
-# NVM setup
-function nvm
-    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
-end
-
-# Load nvm on terminal start
-if test -f ~/.nvm/nvm.sh
-    set -gx NVM_DIR ~/.nvm
-    bass source ~/.nvm/nvm.sh --no-use
-
-    # If you have a default node version, load it
-    nvm use default
-end
-```
-
-Note: You'll need to install the `bass` plugin first to use nvm with fish:
+Note: we need to install `fisher` first to use `nvm.fish`:
 
 ```bash
 brew install fisher
-fisher install edc/bass
 ```
-Nvm usefull commands: 
+Now we can install `nvm.fish`:
+
+```bash
+fisher install jorgebucaran/nvm.fish
+```
+
+Now we need to add the following to your `~/.config/fish/config.fish`, for some default settings, this is not mandatory:
+
+```bash
+# NVM setup (nvm.fish)
+set -gx nvm_default_version "lts"
+set -gx nvm_mirror "https://nodejs.org/dist"
+set -gx nvm_default_packages "npm" "pnpm" "yarn"
+```
+Nvm.fish usefull commands: 
 
 ```bash
 # List available Node.js versions
-nvm ls-remote
+nvm list
+
+# Install the latest LTS version
+nvm install lts
 
 # Install a specific version
 nvm install 22.11.0  # Example version
 
 # Switch to a specific version
-nvm use 22.11.0
+nvm use lts
 
 # Set a default version
 nvm alias default 22.11.0
 
-# List installed versions
-nvm ls
-
-# Install latest LTS version
-nvm install --lts
-
 # Use the latest LTS version
-nvm use --lts
+nvm use lts
 ```
-
-**Note:** homebrew installs the latest node version, use nvm to install a stable version and then set it as the default:
+**Note:** homebrew installs the latest node version, use nvm to install a stable version:
 
 ```bash
-nvm install 22.11.0
-nvm alias default 22.11.0
+nvm install lts
 ```
 
 Additionally, after installing node, you need to install the neovim npm package globally for the node provider to work:
