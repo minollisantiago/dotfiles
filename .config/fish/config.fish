@@ -14,6 +14,16 @@ if status is-interactive
     set -gx nvm_mirror "https://nodejs.org/dist"
     set -gx nvm_default_packages "npm" "pnpm" "yarn"
 
+    # Remove Windows Node.js paths from PATH
+    set -x PATH (string split : "$PATH" | string match -v "*scoop/apps/nvm*" | string join :)
+
+    # Ensure nvm.fish is loaded
+    if not test -d $HOME/.local/share/nvm
+        # Initialize nvm if not already done
+        nvm install lts
+        nvm use lts
+    end
+
     # Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
     function fuzz-preview
         fzf --preview="bat --color=always {}"

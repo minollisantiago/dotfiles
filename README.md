@@ -656,7 +656,7 @@ Now we can install `nvm.fish`:
 fisher install jorgebucaran/nvm.fish
 ```
 
-Now we need to add the following to your `~/.config/fish/config.fish`, for some default settings, this is not mandatory:
+After installing it, we need to add the following to your `~/.config/fish/config.fish`, for some default settings, this is not mandatory:
 
 ```bash
 # NVM setup (nvm.fish)
@@ -664,6 +664,12 @@ set -gx nvm_default_version "lts"
 set -gx nvm_mirror "https://nodejs.org/dist"
 set -gx nvm_default_packages "npm" "pnpm" "yarn"
 ```
+
+These will do the following:
+- Set the default version to the latest LTS version
+- Set the download mirror to the official Node.js mirror
+- Install the default packages, whenever you install a new node version: npm, pnpm and yarn *(select more if you want)*
+
 Nvm.fish usefull commands: 
 
 ```bash
@@ -703,6 +709,86 @@ Installing it:
 - Only adds support for Node.js-based features in Neovim
 
 The package just provides the necessary bindings for Neovim to interact with Node.js.
+
+##### Issues with node and WSL 🔥
+**If you are having issues with `npm` lagging and your shell getting frozen**, it may be due to:
+
+- Some conflict with your WSL2 and your windows node installation.
+- Some issue with windows dynamic DNS settings.
+
+To fix it, you can try the following:
+
+**1. Windows DNS**
+
+I found this fix on [reddit](https://www.reddit.com/r/bashonubuntuonwindows/comments/nt8asc/npm_install_extremely_slow_on_wsl2/).
+
+The fix involves running this in your terminal: 
+
+```bash
+sudo rm /etc/resolv.conf
+sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+sudo bash -c 'echo "[network]" > /etc/wsl.conf'
+sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+sudo chattr +i /etc/resolv.conf
+```
+Here's a quick explanation of what each command does:
+- `sudo rm /etc/resolv.conf`:
+Removes the existing DNS resolver config file. This file tells Linux which DNS servers to use to resolve domain names.
+
+- `sudo bash -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'`:
+Creates a new `resolv.conf` file and sets the DNS server to Google's public DNS server at 8.8.8.8. This is a temporary change.
+
+- `sudo bash -c 'echo "[network]" > /etc/wsl.conf'`:
+Creates/overwrites the WSL configuration file, and starts the section for network settings.
+
+- `sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'`:
+Sets the WSL configuration to not automatically generate a custom `resolv.conf` file. This prevents windows from overwriting the WSL2 network settings.
+
+- `sudo chattr +i /etc/resolv.conf`:
+Makes the resolv.conf file immutable, preventing it from being modified by non-root users. This ensures the DNS setting stays fixed.
+
+After running these commands, run with admin privileges:
+
+```bash
+wsl --shutdown
+```
+
+**2.  Node Path**
+First, we need to check if the `node` path in your WSL instance's `PATH` variable is not pointed to your windows node installation:
+
+```bash
+echo $PATH
+```
+
+You can look for node/nvm in the $PATH using grep, to make sure where its pointed:
+
+```bash
+echo $PATH | grep node
+```
+If it is, add this to your `~/.config/fish/config.fish` file to remove it from the path:
+
+```bash
+# Remove Windows Node.js paths from PATH
+set -x PATH (string split : "$PATH" | string match -v "*scoop/apps/nvm*" | string join :)
+
+# Ensure nvm.fish is loaded
+if not test -d $HOME/.local/share/nvm
+    nvm install lts
+    nvm use lts
+end
+```
+
+This will remove the windows node path from the path, and ensure nvm is loaded (with nvm.fish), and initialize the lts node version (in this example, you can pick any specific version if you want).
+
+**Note:** The `config.fish` in this repo already has these lines.
+
+After sourcing your `config.fish` file, you can test if it worked by running:
+
+```bash
+which node
+```
+
+And make sure it points to a WSL path, by default `nvm.fish` should set it inside your `~/.local/share/nvm` folder.
 
 ##### Step 3: Install LazyVim
 
