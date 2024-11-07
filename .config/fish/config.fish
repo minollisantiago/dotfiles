@@ -32,11 +32,11 @@ if status is-interactive
 
     # Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
     function fuzz-preview
-        fzf --preview="bat --color=always {}"
+        fzf --preview="bat --color=always {}" --color="hl:#FDBD9C,hl+:#F81A70"
     end
 
     function fuzz-preview-nvim
-        nvim (fzf -m --preview="bat --color=always {}")
+        nvim (fzf -m --preview="bat --color=always {}" --color="hl:#FDBD9C,hl+:#F81A70")
     end
 
     #zoxide directory jumper
