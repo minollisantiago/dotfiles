@@ -10,7 +10,7 @@ if status is-interactive
     uvx --generate-shell-completion fish | source
 
     # NVM setup (nvm.fish)
-    set -gx nvm_default_version "lts"
+    set -Ux nvm_default_version "lts"
     set -gx nvm_mirror "https://nodejs.org/dist"
     set -gx nvm_default_packages "npm" "pnpm" "yarn"
 
@@ -23,6 +23,9 @@ if status is-interactive
         nvm install lts
         nvm use lts
     end
+
+    # Use default nodejs
+    nvm use default
 
     # Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
     function fuzz-preview
