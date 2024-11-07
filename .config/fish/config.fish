@@ -6,6 +6,9 @@ if status is-interactive
     # Oh my posh config
     oh-my-posh init fish --config ~/.config/oh-my-posh/santiago.omp.json | source
 
+    # Bat syntax highlighting
+    set -Ux BAT_THEME "kanagawa"
+
     # Python UVX shell completions
     uvx --generate-shell-completion fish | source
 
