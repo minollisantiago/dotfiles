@@ -467,6 +467,30 @@ To install:
 brew install fzf
 ```
 
+If you want to have syntax highlighting in the preview, make sure to install `bat`:
+
+```bash
+brew install bat
+```
+
+This repo comes with the [kanagawa theme](https://github.com/rebelot/kanagawa.nvim) for bat as well as for nvim and fish, if you want to use it for bat, once installed, clone the `kanagawa.tmTheme` file to your `~/.config/bat/themes` folder:
+
+```bash
+# Navigate to the bat themes folder
+cd ~/.config/bat/themes
+
+# Clone the kanagawa theme
+curl -O https://raw.githubusercontent.com/minollisantiago/dotfiles/master/.config/bat/themes/kanagawa.tmTheme
+```
+
+If you clone the entire repo into your `~/.config` folder, you'll have the theme by default. 
+
+To make it available to bat, you need to update the binary cache:
+
+```bash
+bat cache --build
+```
+
 ##### zoxide
 [Zoxide](https://github.com/ajeetdsouza/zoxide) is a fast cd command that learns your habits.
 
