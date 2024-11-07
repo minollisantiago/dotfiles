@@ -602,6 +602,7 @@ Im going with gcc, but i find zig works well too:
 brew install gcc
 ```
 **Telescope** 🔥
+
 You need to install `ripgrep` and `fd` for Telescope to work properly. If `fd` is not installed, you wont be able to live grep, and if `ripgrep` is not installed, you will either not be able to search for files or (in my case) experience weird behaviour where all ignored files are tracked (node_modules, .git files, etc): 
 
 ```bash
@@ -629,12 +630,14 @@ git config --global core.sshCommand "C:\Windows\System32\OpenSSH\ssh.exe"
 ```
 
 **Clipboard** 🔥
+
 Ive found that WSL does not support clipboard access out of the box, so you wont be able to use the clipboard with neovim unless you install `xclip` or `xsel`:
 
 ```bash
 sudo apt install xclip
 ```
 **Node/nvm** 🔥
+
 To install all the LSPs for neovim, through `mason`, we need to install `node` (and `npm`) first.
 
 You can install `nvm` first, to manage node versions:
@@ -711,6 +714,7 @@ Installing it:
 The package just provides the necessary bindings for Neovim to interact with Node.js.
 
 ##### Issues with node and WSL 🔥
+
 **If you are having issues with `npm` lagging and your shell getting frozen**, it may be due to:
 
 - Some conflict with your WSL2 and your windows node installation.
