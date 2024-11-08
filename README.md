@@ -50,108 +50,110 @@ In descending order of relevance for my setup:
 
 Wrote this up when i was practicing the motions to help me remember them. Some of them are vscode only, as i started first learning motions in vscode and later transitioned to neovim.
 
-#### Vertical motions
+##### Vertical motions
 
-- **hjkl: j // k =** to move down/up
-- **{ // } =** go up/down a block of code
-- **ctrl-d // ctrl-u =** go down/up half a page
-- **G // gg =** go to the bottom/to the top of the file
-- **zz =** centers the cursor at the middle of the screen
-- **/{word} =** Search for {word} then press enter and jump through all matches with n (down) or shift-n (up)
-- **?{word} =** Search for {word} backwards, then press enter and invert the search done with /
-- **{\*} while highlighting a word =** "saves" the highlighted word, then press n or shift-n to jump through all matches (up/down)
-- **:{number} =** moves the cursor to line {number}
+> - **hjkl: j // k =** to move down/up
+> - **{ // } =** go up/down a block of code
+> - **ctrl-d // ctrl-u =** go down/up half a page
+> - **G // gg =** go to the bottom/to the top of the file
+> - **zz =** centers the cursor at the middle of the screen
+> - **/{word} =** Search for {word} then press enter and jump through all matches with n (down) or shift-n (up)
+> - **?{word} =** Search for {word} backwards, then press enter and invert the search done with /
+> - **{\*} while highlighting a word =** "saves" the highlighted word, then press n or shift-n to jump through all matches (up/down)
+> - **:{number} =** moves the cursor to line {number}
 
-#### Horizontal motions
+##### Horizontal motions
 
-- **hjkl: h // l =** to move left/right
-- **w / b =** moves to the beginning of the next/previous word
-- **e =** moves the cursor to the end of the next word
-- **E =** moves the cursor to the next non-alphanumeric character (commas, parenthesis, etc)
-- **f+{character} =** takes you to that character inside a line (included)
-- **t+{character} =** takes you to that character inside a line (not included)
-- **; // , after f/t+{character} =** jump forward/backwards between the selected {character}
-- **0 =** takes you to the beginning of the line
-- **$ =** takes you to the end of the line
+> - **hjkl: h // l =** to move left/right
+> - **w / b =** moves to the beginning of the next/previous word
+> - **e =** moves the cursor to the end of the next word
+> - **E =** moves the cursor to the next non-alphanumeric character (commas, parenthesis, etc)
+> - **f+{character} =** takes you to that character inside a line (included)
+> - **t+{character} =** takes you to that character inside a line (not included)
+> - **; // , after f/t+{character} =** jump forward/backwards between the selected {character}
+> - **0 =** takes you to the beginning of the line
+> - **$ =** takes you to the end of the line
 
-#### Commands/Actions
+##### Commands/Actions
 
-- **d =** delete, also copys to clipboard
-- **c =** change, deletes and moves to insert mode
-- **dd =** delete line
-- **cc =** change line, deletes it and moves to inser mode
-- **shift + d =** delete line from cursor
-- **shift + c =** delete line from cursor and enter insert mode
-- **y =** copy to clipboard
-- **yy =** copy (yank) line to clipboard
-- **p =** paste. If we have a complete line on the clipboard, paste line below the cursor
-- **shift-p =** paste. If we have a complete line on the clipboard, paste line above the cursor
-- **u =** undo last
-- **ctrl+r =** redo last
-- **o =** adds a newline below and moves to insert mode
-- **O =** adds a newline above and moves to insert mode
-- **i =** moves into insert mode, back of the cursor
-- **a =** moves into insert mode, front of the cursor
-- **shift + i =** sends you to the beginning of the line and puts you into insert mode
-- **shift + a =** sends you to the end of the line and puts you into insert mode
-- **~ =** changes upper/lower to lower/upper case
-- **. =** redo last command
-- **v =** move to visual mode, can select code with movement
-- **shift + v =** move to visual mode, can select lines with movement
-- **ctrl + v =** block visual mode, to select blocks
+> - **d =** delete, also copys to clipboard
+> - **c =** change, deletes and moves to insert mode
+> - **dd =** delete line
+> - **cc =** change line, deletes it and moves to inser mode
+> - **shift + d =** delete line from cursor
+> - **shift + c =** delete line from cursor and enter insert mode
+> - **y =** copy to clipboard
+> - **yy =** copy (yank) line to clipboard
+> - **p =** paste. If we have a complete line on the clipboard, paste line below the cursor
+> - **shift-p =** paste. If we have a complete line on the clipboard, paste line above the cursor
+> - **u =** undo last
+> - **ctrl+r =** redo last
+> - **o =** adds a newline below and moves to insert mode
+> - **O =** adds a newline above and moves to insert mode
+> - **i =** moves into insert mode, back of the cursor
+> - **a =** moves into insert mode, front of the cursor
+> - **shift + i =** sends you to the beginning of the line and puts you into insert mode
+> - **shift + a =** sends you to the end of the line and puts you into insert mode
+> - **~ =** changes upper/lower to lower/upper case
+> - **. =** redo last command
+> - **v =** move to visual mode, can select code with movement
+> - **shift + v =** move to visual mode, can select lines with movement
+> - **ctrl + v =** block visual mode, to select blocks
 
+
+##### My navigation commands and keymaps
 Commands can be combined with motion to have enhanced effects:
 
-#### My navigation commands and keymaps
+> - **leader+q =** Close editor/file
+> - **leader+w =** Save file
+> - **leader+x =** Save file and close it
+> - **leader+v =** Split screen vertically
+> - **leader+h =** Split screen horizontally
+> - **leader+c =** on visual mode, comment line
+> - **tab // shift-tab =** Tab navigation
+> - **ctrl-d // ctrl+u =** combined with zz to move down/up and center view
+> - **ctrl+shift+n =** While on the editor, open new vscode project
+> - **tab // shift-tab [insert or visual mode] =** indent line, if you combine with movement you can indent blocks
 
-- **leader+q =** Close editor/file
-- **leader+w =** Save file
-- **leader+x =** Save file and close it
-- **leader+v =** Split screen vertically
-- **leader+h =** Split screen horizontally
-- **leader+c =** on visual mode, comment line
-- **tab // shift-tab =** Tab navigation
-- **ctrl-d // ctrl+u =** combined with zz to move down/up and center view
-- **ctrl+shift+n =** While on the editor, open new vscode project
-- **tab // shift-tab [insert or visual mode] =** indent line, if you combine with movement you can indent blocks
+##### File tree
 
-#### File tree
+> - **ctrl-e =** open/close file tree
+> - **jk =** Move down/up inside the file tree
+> - **h =** Close folder (if opened)
+> - **l =** Open file or folder
+> - **n =** Create new file inside current location on the tree
+> - **ctrl-n =** Create and open new file
+> - **ctrl+shift+n =** Create new folder inside current location on the tree
 
-- **ctrl-e =** open/close file tree
-- **jk =** Move down/up inside the file tree
-- **h =** Close folder (if opened)
-- **l =** Open file or folder
-- **n =** Create new file inside current location on the tree
-- **ctrl-n =** Create and open new file
-- **ctrl+shift+n =** Create new folder inside current location on the tree
+##### Console
 
-#### Console
+> - **ctrl+j =** Open/close console
+> - **ctrl+shift+j =** Open new console
+> - **ctrl+shift+q =** Terminate console
+> - **ctrl+shift+(a/b) =** Move up/down between running consoles
 
-- **ctrl+j =** Open/close console
-- **ctrl+shift+j =** Open new console
-- **ctrl+shift+q =** Terminate console
-- **ctrl+shift+(a/b) =** Move up/down between running consoles
+##### Harpoon
 
-#### Harpoon
+> - **leader+a =** add file to the harpoon editor list
+> - **leader+e =** open harpoon editor filelist, editable
+> - **leader+i (number) =** open the ith editor previously stored
 
-- **leader+a =** add file to the harpoon editor list
-- **leader+e =** open harpoon editor filelist, editable
-- **leader+i (number) =** open the ith editor previously stored
+##### Some tricks (motions)
 
-## Some tricks (motions)
+> - **d-i-W =** delete all words until hitting whitespace on both sides (right and left), applies for all commands (c, v, d).
+> - **d-i-q =** delete all contents inside quotes, applies for all commands (c, v, d).
+> - **dii =** delete all contents at identation level, applies for all commands (c, v, d).
+> - **ctrl-d and ctrl-u =** changed settings to add zz to each command, this centers the cursor and so the code "travels" up and down with the cursor always fixed at the center of the screen. **Best way to move vertically**
+> - **trick:** select a number of lines with visual mode, then press shift-i to trigger insert mode on all of them
+> - **%:** standing on a character, sends the cursor to the same type of character, works well with visualmode to select code between {[]}
 
-- **d-i-W =** delete all words until hitting whitespace on both sides (right and left), applies for all commands (c, v, d).
-- **d-i-q =** delete all contents inside quotes, applies for all commands (c, v, d).
-- **dii =** delete all contents at identation level, applies for all commands (c, v, d).
-- **ctrl-d and ctrl-u =** changed settings to add zz to each command, this centers the cursor and so the code "travels" up and down with the cursor always fixed at the center of the screen. **Best way to move vertically**
-- **trick:** select a number of lines with visual mode, then press shift-i to trigger insert mode on all of them
-- **%:** standing on a character, sends the cursor to the same type of character, works well with visualmode to select code between {[]}
-- **some combos:**
-  - **d + t + {character} =** delete line up to {character}
-  - **c + t + {character} =** delete up to {character} and go into insert mode
-  - **press \* to select all matching words then type: :%s//new_word+enter =** replace all occurrences with new_word
-  - **shift + V [Visual mode line] + select lines + tab/shift+tab =** indents a block of code
-  - **ctrl + shift + v =** open markdown server
+##### Some combos
+
+> - **d + t + {character} =** delete line up to {character}
+> - **c + t + {character} =** delete up to {character} and go into insert mode
+> - **press \* to select all matching words then type: :%s//new_word+enter =** replace all occurrences with new_word
+> - **shift + V [Visual mode line] + select lines + tab/shift+tab =** indents a block of code
+> - **ctrl + shift + v =** open markdown server
 
 ## Resources (motions)
 
@@ -315,8 +317,8 @@ brew doctor
 ```
 ### 6. Terminal: Powershell
 
-**Note: If you prefer a more stable and native Linux shell experience in WSL, skip to** [Fish](#7-terminal-fish).
-
+> [!TIP]
+> If you prefer a more stable and native Linux shell experience in WSL, skip to [Fish](#7-terminal-fish).
 
 I'm using powershell right now with oh-my-posh for windows, if you want to use it on WSL, you can follow the steps below:
 
@@ -399,7 +401,8 @@ chsh -s /path/to/bin/fish
 ```
 Restart the terminal and fish should be your default shell.
 
-**Note:** If you are having trouble with oh-my-posh or neovim not being recognized by fish, you can add the following to your `~/.config/fish/config.fish` file:
+> [!IMPORTANT]
+> If you are having trouble with oh-my-posh or neovim not being recognized by fish, you can add the following to your `~/.config/fish/config.fish` file:
 
 ```bash
 # Add Homebrew to PATH for Fish
@@ -672,7 +675,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 
 For `nvm` to work with fish, we are using `nvm.fish` instead of the default `nvm.sh`, [here is the repo](https://github.com/jorgebucaran/nvm.fish/tree/main).
 
-Note: we need to install `fisher` first to use `nvm.fish`:
+> [!NOTE]
+> we need to install `fisher` first to use `nvm.fish`:
 
 ```bash
 brew install fisher
@@ -718,7 +722,8 @@ nvm alias default 22.11.0
 # Use the latest LTS version
 nvm use lts
 ```
-**Note:** homebrew installs the latest node version, use nvm to install a stable version:
+> [!NOTE]
+> homebrew installs the latest node version, use nvm to install a stable version:
 
 ```bash
 nvm install lts
@@ -808,7 +813,8 @@ end
 
 This will remove the windows node path from the path, and ensure nvm is loaded (with nvm.fish), and initialize the lts node version (in this example, you can pick any specific version if you want).
 
-**Note:** The `config.fish` in this repo already has these lines.
+> [!NOTE]
+> The `config.fish` in this repo already has these lines.
 
 After sourcing your `config.fish` file, you can test if it worked by running:
 
@@ -936,7 +942,8 @@ After adding this, restart your terminal or source your config file:
 ```bash
 exec fish
 ```
-**Note:** The first time you open a terminal each session, it will prompt you for the passphrase.
+> [!NOTE]
+> The first time you open a terminal each session, it will prompt you for the passphrase.
 
 ##### For bash/zsh
 You can also add this to your `~/.bashrc` or `~/.zshrc` file to automatically add the key to the agent. **Note: remember to source your .bashrc/.zshrc file after adding it**.
