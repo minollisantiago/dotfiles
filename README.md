@@ -982,6 +982,51 @@ For more info on how to set-up a python project with `uv`, go to the [docs](http
 >
 > I include all my projects in the `~/projects` folder, so i can activate their virtual environments with the `activate-venv` function and make use of their CLI tools from anywhere.
 
+##### Direnv
+
+[From their site](https://direnv.net/). Direnv is a tool that automatically sets environment variables for your shell when you navigate to a project directory. It's useful for managing virtual environments, Python versions, etc.
+
+> [!TIP]
+> **Direnv + UV**
+>
+> I like to use it to activate my uv environments and running the `uv sync` command to sync dependencies. Since uv is so fast, its not a problem running `uv sync` every time i navigate to a project.
+>
+> **Credit for the idea**: Hynek Schlawack [blogpost](https://hynek.me/articles/docker-uv/)
+
+To install direnv (we are using homebrew):
+
+```bash
+brew install direnv
+```
+
+We then need to add the `direnv` hook to our `fish` config, add the following to your `~/.config/fish/config.fish` file:
+
+```bash
+direnv hook fish | source
+```
+
+For `direnv` to work, we need to create a `.envrc` file in the root of the project we want to manage, this file can be used to set environment variables, python versions, etc.
+
+> [!TIP]
+> In my case i like to use the following `.envrc` file to activate my uv environments and run the `uv sync` command to sync dependencies:
+>
+> ```bash
+> #Sync dependencies
+> uv sync
+>
+> #Activate the project environment
+> source .venv/bin/activate.fish
+> ```
+
+> [!IMPORTANT]
+> **Direnv permissions**
+>
+> Direnv will not load the `.envrc` file if it does not have the correct permissions, after creating it, on a project basis, you need to run the following command to make the `.envrc` file executable:
+>
+> ```bash
+> direnv allow .
+> ```
+
 ### 16. Install Anaconda/Miniconda on WSL and Verify
 
 If you need anaconda instead of [UV](#uv-python-package-project-manager) or [poetry](https://python-poetry.org/), perhaps due to issues with CUDA/pytorch, etc. You can install anaconda as an alternative:
