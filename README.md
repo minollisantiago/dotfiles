@@ -1053,8 +1053,9 @@ Here is the complete list of references ive used for setting up my dotfiles, all
 
 Wrote this up when i was practicing the motions to help me remember them. Some of them are vscode only, as i started first learning motions in vscode and later transitioned to neovim.
 
-##### Vertical motions
-
+> [!TIP] 
+> **Vertical motions**
+>
 > - **hjkl: j // k =** to move down/up
 > - **{ // } =** go up/down a block of code
 > - **ctrl-d // ctrl-u =** go down/up half a page
@@ -1065,8 +1066,9 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 > - **{\*} while highlighting a word =** "saves" the highlighted word, then press n or shift-n to jump through all matches (up/down)
 > - **:{number} =** moves the cursor to line {number}
 
-##### Horizontal motions
-
+> [!TIP] 
+> **Horizontal motions**
+>
 > - **hjkl: h // l =** to move left/right
 > - **w / b =** moves to the beginning of the next/previous word
 > - **e =** moves the cursor to the end of the next word
@@ -1077,8 +1079,9 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 > - **0 =** takes you to the beginning of the line
 > - **$ =** takes you to the end of the line
 
-##### Commands/Actions
-
+> [!TIP] 
+> **Commands/Actions**
+>
 > - **d =** delete, also copys to clipboard
 > - **c =** change, deletes and moves to insert mode
 > - **dd =** delete line
@@ -1104,9 +1107,11 @@ Wrote this up when i was practicing the motions to help me remember them. Some o
 > - **ctrl + v =** block visual mode, to select blocks
 
 
-##### My navigation commands and keymaps
-Commands can be combined with motion to have enhanced effects:
-
+> [!TIP] 
+> **My navigation commands and keymaps**
+>
+> Commands can be combined with motion to have enhanced effects:
+>
 > - **leader+q =** Close editor/file
 > - **leader+w =** Save file
 > - **leader+x =** Save file and close it
@@ -1119,7 +1124,9 @@ Commands can be combined with motion to have enhanced effects:
 > - **tab // shift-tab [insert or visual mode] =** indent line, if you combine with movement you can indent blocks
 
 
-> [!TIP] **File tree**
+> [!TIP] 
+> **File tree**
+>
 > - **ctrl-e =** open/close file tree
 > - **jk =** Move down/up inside the file tree
 > - **h =** Close folder (if opened)
@@ -1128,21 +1135,23 @@ Commands can be combined with motion to have enhanced effects:
 > - **ctrl-n =** Create and open new file
 > - **ctrl+shift+n =** Create new folder inside current location on the tree
 
-##### Console
-
+> [!TIP] 
+> **Console**
+>
 > - **ctrl+j =** Open/close console
 > - **ctrl+shift+j =** Open new console
 > - **ctrl+shift+q =** Terminate console
 > - **ctrl+shift+(a/b) =** Move up/down between running consoles
 
-##### Harpoon
-
+> [!TIP] 
+> **Harpoon**
+>
 > - **leader+a =** add file to the harpoon editor list
 > - **leader+e =** open harpoon editor filelist, editable
 > - **leader+i (number) =** open the ith editor previously stored
 
-##### Some tricks (motions)
-
+> [!TIP] 
+> **Some tricks (motions)**
 > - **d-i-W =** delete all words until hitting whitespace on both sides (right and left), applies for all commands (c, v, d).
 > - **d-i-q =** delete all contents inside quotes, applies for all commands (c, v, d).
 > - **dii =** delete all contents at identation level, applies for all commands (c, v, d).
@@ -1150,8 +1159,9 @@ Commands can be combined with motion to have enhanced effects:
 > - **trick:** select a number of lines with visual mode, then press shift-i to trigger insert mode on all of them
 > - **%:** standing on a character, sends the cursor to the same type of character, works well with visualmode to select code between {[]}
 
-##### Some combos
-
+> [!TIP] 
+> **Some combos**
+>
 > - **d + t + {character} =** delete line up to {character}
 > - **c + t + {character} =** delete up to {character} and go into insert mode
 > - **press \* to select all matching words then type: :%s//new_word+enter =** replace all occurrences with new_word
