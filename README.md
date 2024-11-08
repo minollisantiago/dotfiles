@@ -1118,8 +1118,8 @@ Commands can be combined with motion to have enhanced effects:
 > - **ctrl+shift+n =** While on the editor, open new vscode project
 > - **tab // shift-tab [insert or visual mode] =** indent line, if you combine with movement you can indent blocks
 
-##### File tree
 
+> [!TIP] **File tree**
 > - **ctrl-e =** open/close file tree
 > - **jk =** Move down/up inside the file tree
 > - **h =** Close folder (if opened)
