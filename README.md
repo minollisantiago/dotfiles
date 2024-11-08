@@ -1110,22 +1110,23 @@ For more info on how to set-up a python project with `uv`, go to the [docs](http
 
 > [!TIP]
 > **UV venv activation alias**
+>
 > I've added a function to activate a uv `venv` without changing directory, for any CLI apps i may have, ive included it in the `config.fish` file on this repo:
 >
-> ```bash
+ > ```bash
 > # Function to activate Python uv venv without changing directory
 > function activate-venv
-    > if test -n "$argv[1]"
-        > set -l venv_path "$HOME/projects/$argv[1]/.venv/bin/activate.fish"
-        > if test -f $venv_path
-            > source $venv_path
-        > else
-            > echo "Virtual environment not found at: $venv_path"
-            > echo "Make sure the project exists and has a virtual environment"
-        > end
-    > else
-        > echo "Please provide a project name"
-    > end
+>    if test -n "$argv[1]"
+>        set -l venv_path "$HOME/projects/$argv[1]/.venv/bin/activate.fish"
+>        if test -f $venv_path
+>            source $venv_path
+>        else
+>            echo "Virtual environment not found at: $venv_path"
+>            echo "Make sure the project exists and has a virtual environment"
+>        end
+>    else
+>        echo "Please provide a project name"
+>    end
 > end
 > ```
 >
