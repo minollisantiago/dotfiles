@@ -1051,7 +1051,8 @@ Here is the complete list of references ive used for setting up my dotfiles, all
 
 ## Vim motions i use (some)
 
-Wrote this up when i was practicing the motions to help me remember them. Some of them are vscode only, as i started first learning motions in vscode and later transitioned to neovim.
+> [!NOTE]
+> Wrote this up when i was practicing the motions to help me remember them. Some of them are vscode only, as i started first learning motions in vscode and later transitioned to neovim.
 
 > [!TIP] 
 > **Vertical motions**
