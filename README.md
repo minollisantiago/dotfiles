@@ -13,10 +13,11 @@ Terminal with terminal icons and firacode Mono:
 Dotfiles for:
 
 - **neovim** with [lazyvim](https://www.lazyvim.org/)
-- **powershell** with [oh-my-posh](https://ohmyposh.dev/)
+- **wsl + fish (with neovim)** with [fish shell](https://fishshell.com/)
+- **powershell (and fish)** with [oh-my-posh](https://ohmyposh.dev/)
 - **vscode** vim motions and custom keybinds + other settings
 
-Themes im using for neovim and vscode:
+Themes im using for neovim, bat, fzf, fish and vscode:
 
 - **nvim:** [Kanagawa](https://github.com/rebelot/kanagawa.nvim)
 - **vscode:** [Solarized-Osaka for vscode](https://github.com/sherloach/vscode-theme-solarized-osaka). Original by Devaslife [Solarized-osaka for nvim](https://github.com/craftzdog/solarized-osaka.nvim)
@@ -1161,20 +1162,20 @@ Commands can be combined with motion to have enhanced effects:
 
 ##### Vim motions intro by The Primeagen
 
-[![Video](https://img.youtube.com/vi/X6AR2RMB5tE/maxresdefault.jpg)](https://www.youtube.com/watch?v=X6AR2RMB5tE&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=3&pp=gAQBiAQB)
+[![Video](https://img.youtube.com/vi/X6AR2RMB5tE/hqdefault.jpg)](https://www.youtube.com/watch?v=X6AR2RMB5tE&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=3&pp=gAQBiAQB)
 
 ##### Vim motions - horizontal by the Primeagen
 
-[![Video](https://img.youtube.com/vi/5JGVtttuDQA/maxresdefault.jpg)](https://www.youtube.com/watch?v=5JGVtttuDQA&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=4&t=349s)
+[![Video](https://img.youtube.com/vi/5JGVtttuDQA/hqdefault.jpg)](https://www.youtube.com/watch?v=5JGVtttuDQA&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=4&t=349s)
 
 ##### Vim motions - vertical by the Primeagen
 
-[![Video](https://img.youtube.com/vi/KfENDDEpCsI/maxresdefault.jpg)](https://www.youtube.com/watch?v=KfENDDEpCsI&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=5)
+[![Video](https://img.youtube.com/vi/KfENDDEpCsI/hqdefault.jpg)](https://www.youtube.com/watch?v=KfENDDEpCsI&list=PL4UMjyVQYX-Fhbp9kPziRH13caNcO9qMg&index=5)
 
 ##### Vim motions for vscode by MelkeyDev, [settings.json and keybinds.json files for vscode](https://github.com/Melkeydev/vscode_bindings)
 
-[![Video](https://img.youtube.com/vi/GST8we5uABo/maxresdefault.jpg)](https://www.youtube.com/watch?v=GST8we5uABo)
+[![Video](https://img.youtube.com/vi/GST8we5uABo/hqdefault.jpg)](https://www.youtube.com/watch?v=GST8we5uABo)
 
 ##### Vim Tutorial by Ben Awad
 
-[![Video](https://img.youtube.com/vi/IiwGbcd8S7I/maxresdefault.jpg)](https://www.youtube.com/watch?v=IiwGbcd8S7I&list=PL4UMjyVQYX-EsTmFDgKK_3yld_xiFcRXO&index=31&t=2315s)
+[![Video](https://img.youtube.com/vi/IiwGbcd8S7I/hqdefault.jpg)](https://www.youtube.com/watch?v=IiwGbcd8S7I&list=PL4UMjyVQYX-EsTmFDgKK_3yld_xiFcRXO&index=31&t=2315s)
