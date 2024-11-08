@@ -912,7 +912,7 @@ nvidia-smi
 
 ### 15. Python Tools Im using in WSL
 
-##### UV (python package/project manager)
+#### UV (python package/project manager)
 
 [From their page](https://docs.astral.sh/uv/), uv is an extremely fast python package and project manager, written in Rust.
 
@@ -982,7 +982,7 @@ For more info on how to set-up a python project with `uv`, go to the [docs](http
 >
 > I include all my projects in the `~/projects` folder, so i can activate their virtual environments with the `activate-venv` function and make use of their CLI tools from anywhere.
 
-##### Direnv
+#### Direnv
 
 [From their site](https://direnv.net/). Direnv is a tool that automatically sets environment variables for your shell when you navigate to a project directory. It's useful for managing virtual environments, Python versions, etc.
 
@@ -991,7 +991,7 @@ For more info on how to set-up a python project with `uv`, go to the [docs](http
 >
 > I like to use it to activate my uv environments and running the `uv sync` command to sync dependencies. Since uv is so fast, its not a problem running `uv sync` every time i navigate to a project.
 >
-> **Credit for the idea**: Hynek Schlawack [blogpost](https://hynek.me/articles/docker-uv/)
+> **I got the idea from [this blogpost](https://hynek.me/articles/docker-uv/)**.
 
 To install direnv (we are using homebrew):
 
@@ -1007,6 +1007,16 @@ direnv hook fish | source
 
 For `direnv` to work, we need to create a `.envrc` file in the root of the project we want to manage, this file can be used to set environment variables, python versions, etc.
 
+> [!IMPORTANT]
+> **Direnv permissions**
+>
+> Direnv will not load, and in my case not allow me to create, the `.envrc` file if it does not have the correct permissions, after creating it, on a project basis, you need to run the following command to make the `.envrc` file executable:
+>
+> ```bash
+> direnv allow
+> ```
+> Run this from the root of the project, before, **and after** creating the `.envrc` file.
+
 > [!TIP]
 > In my case i like to use the following `.envrc` file to activate my uv environments and run the `uv sync` command to sync dependencies:
 >
@@ -1015,16 +1025,7 @@ For `direnv` to work, we need to create a `.envrc` file in the root of the proje
 > uv sync
 >
 > #Activate the project environment
-> source .venv/bin/activate.fish
-> ```
-
-> [!IMPORTANT]
-> **Direnv permissions**
->
-> Direnv will not load the `.envrc` file if it does not have the correct permissions, after creating it, on a project basis, you need to run the following command to make the `.envrc` file executable:
->
-> ```bash
-> direnv allow .
+> source .venv/bin/activate
 > ```
 
 ### 16. Install Anaconda/Miniconda on WSL and Verify

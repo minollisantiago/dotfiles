@@ -12,6 +12,9 @@ if status is-interactive
     # Python UVX shell completions
     uvx --generate-shell-completion fish | source
 
+    # Direnv
+    direnv hook fish | source
+
     # NVM setup (nvm.fish)
     set -Ux nvm_default_version "lts"
     set -gx nvm_mirror "https://nodejs.org/dist"
