@@ -116,4 +116,17 @@ if status is-interactive
     set -g fish_pager_color_completion $foreground
     set -g fish_pager_color_description $comment
 
+    #Avante nvim
+    set -gx XAI_API_KEY your_grok_apy_key
+
+    #Your Local IP if you are on WSL and the model is hosted on windows with LM studio
+    set -gx WINDOWS_LOCALHOST 999.999.9.999
+
+    # Set up XDG runtime directory for user-specific temporary files
+    # The directory must exist and have restrictive permissions (700) for security
+    # We need this for avante to work with local llms, otherwise curl cant write to the default runtime location
+    set -gx XDG_RUNTIME_DIR /tmp/runtime-$USER
+    mkdir -p $XDG_RUNTIME_DIR
+    chmod 700 $XDG_RUNTIME_DIR
+
 end
