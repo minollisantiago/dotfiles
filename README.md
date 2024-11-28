@@ -912,7 +912,7 @@ nvidia-smi
 
 ### 15. Python Tools Im using in WSL
 
-#### UV (python package/project manager)
+<h4 id="uv">UV: python package/project manager</h4>
 
 [From their page](https://docs.astral.sh/uv/), uv is an extremely fast python package and project manager, written in Rust.
 
@@ -1030,7 +1030,10 @@ For `direnv` to work, we need to create a `.envrc` file in the root of the proje
 
 ### 16. Install Anaconda/Miniconda on WSL and Verify
 
-If you need anaconda instead of [UV](#uv-python-package-project-manager) or [poetry](https://python-poetry.org/), perhaps due to issues with CUDA/pytorch, etc. You can install anaconda as an alternative:
+> [!IMPORTANT]
+> **I recommend/strongly favor using [UV](#uv) instead of anaconda**.
+
+If you need anaconda instead of [UV](#uv) or [poetry](https://python-poetry.org/), perhaps due to issues with CUDA/pytorch, etc. You can install anaconda as an alternative:
 
 ##### Download Miniconda/Anaconda
 
@@ -1066,6 +1069,78 @@ To verify Conda installation:
 conda --version
 ```
 ---
+
+### 17. LLM tools: Avante.nvim
+
+[Avante.nvim](https://github.com/yetone/avante.nvim) is a Neovim plugin designed to emulate the behaviour of the Cursor AI IDE. Basically, integrate your nvim with LLMs.
+
+> [!IMPORTANT]
+> **For avante to work you will need API keys for any of the supported LLM providers, additionally you can add your own providers, local or otherwise.**
+
+I have included a custom configuration for avante that makes use of a local [qwen2.5-coder model](https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct-GGUF) that im serving locally with [LM Studio](https://lmstudio.ai/).
+
+> [!NOTE]
+> To include any local model as a valid provider, follow the documentation [here](https://github.com/yetone/avante.nvim/wiki/Custom-providers).
+
+With lazyvim, you basically need to include the local model into the vendors section of the avante config as a custom provider that points to the local model, including a `parse_curl_args` and `parse_response_data` functions, here is my configuration for this model:
+
+```lua
+return {
+  "yetone/avante.nvim",
+  opts = {
+    provider = "local-qwen",
+    vendors = {
+      ---@type AvanteProvider
+      ["local-qwen"] = {
+        ["local"] = true,
+        endpoint = "http://" .. os.getenv("WINDOWS_LOCALHOST") .. ":1235/v1",
+        model = "qwen2.5-coder-14b-instruct",
+        api_key_name = "",
+        timeout = 30000,
+        temperature = 0.7,
+        max_tokens = -1,
+        ---@type fun(opts: AvanteProvider, code_opts: AvantePromptOptions): AvanteCurlOutput
+        parse_curl_args = function(opts, code_opts)
+          return {
+            url = opts.endpoint .. "/chat/completions",
+            headers = {
+              ["Accept"] = "application/json",
+              ["Content-Type"] = "application/json",
+            },
+            body = {
+              model = opts.model,
+              messages = require("avante.providers").openai.parse_messages(code_opts),
+              max_tokens = opts.max_tokens,
+              temperature = opts.temperature,
+              stream = true,
+            },
+          }
+        end,
+        ---@type fun(data_stream: string, event_state: string, opts: ResponseParser): nil
+        parse_response_data = function(data_stream, event_state, opts)
+          require("avante.providers").openai.parse_response(data_stream, event_state, opts)
+        end,
+      },
+    },
+  },
+}
+```
+
+> [!IMPORTANT]
+> In this particular case, qwen2.5-coder-14b-instruct is an **openai compatible model**, so i can use the openai parse functions, if your model is not openai compatible, you will need to implement your own `parse_curl_args` and `parse_response_data` functions.
+
+> [!NOTE]
+> Since im serving the model locally with LM Studio on Windows, but running the avante client on WSL, I have created a global env variable `WINDOWS_LOCALHOST` on my `~/.config/fish/config.fish` file that points to the local ip of the machine serving the model.
+>
+
+> [!IMPORTANT]
+>You might encounter an issue where curl is unable to write to the default runtime location, in that case you can set the `XDG_RUNTIME_DIR` environment variable to a custom location, i have created a global env variable for this on my `~/.config/fish/config.fish` file:
+>
+>```bash
+>set -gx XDG_RUNTIME_DIR /tmp/runtime-$USER
+>mkdir -p $XDG_RUNTIME_DIR
+>chmod 700 $XDG_RUNTIME_DIR
+>```
 
 ## Dotfiles references
 
