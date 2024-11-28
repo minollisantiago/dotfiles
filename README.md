@@ -1129,7 +1129,10 @@ return {
 > In this particular case, qwen2.5-coder-14b-instruct is an **openai compatible model**, so i can use the openai parse functions, if your model is not openai compatible, you will need to implement your own `parse_curl_args` and `parse_response_data` functions.
 
 > [!NOTE]
-> Since im serving the model locally with LM Studio on Windows, but running the avante client on WSL, I have created a global env variable `WINDOWS_LOCALHOST` on my `~/.config/fish/config.fish` file that points to the local ip of the machine serving the model.
+> Since im serving the model locally with LM Studio on Windows, but running the avante client on WSL, I have created a global env variable `WINDOWS_LOCALHOST` on my `~/.config/fish/config.fish` file that points to the local ip of the machine serving the model (example on the `config.fish` file with a fake ip):
+>
+>```bash
+>set -gx WINDOWS_LOCALHOST 999.999.9.999
 >
 
 > [!IMPORTANT]
