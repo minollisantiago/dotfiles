@@ -20,6 +20,7 @@ Dotfiles for:
 Themes im using for neovim, bat, fzf, fish and vscode:
 
 - **nvim:** [Kanagawa](https://github.com/rebelot/kanagawa.nvim)
+- **nvim:** [Vesper](https://github.com/datsfilipe/vesper.nvim)
 - **vscode:** [Solarized-Osaka for vscode](https://github.com/sherloach/vscode-theme-solarized-osaka). Original by Devaslife [Solarized-osaka for nvim](https://github.com/craftzdog/solarized-osaka.nvim)
 
 Nerd font im using:
@@ -369,17 +370,38 @@ Would be the equivalent of, for example:
 cd ~/projects
 ```
 
+##### eza
+[Eza](https://github.com/eza-community/eza) is a modern replacement for the `ls` command, written in Rust. It provides colorized output, git integration, and extended file information by default.
+
+To install with Homebrew:
+
+```bash
+brew install eza
+```
+Ive added the following commands to my `~/.config/fish/config.fish` file to use eza mainly to display files in tree format:
+
+```bash
+alias tree="eza --tree --git-ignore"
+alias trees="eza --tree"
+```
+
+You can select specific folders to inspect in tree format by running:
+
+```bash
+tree <folder>
+```
+
 ##### Additional fish utilities/config (including some aliases for fzf)
 To add a preview to the fuzzy finder and some other quality of life shortcuts that i like to use, add the following to your `~/.config/fish/config.fish` file:
 
 ```bash
 # Fuzzy finder with preview: open with cat explorer mode, similar to Telescope
 function fuzz-preview
-  fzf --preview="bat --color=always {}"
+    fzf --preview="bat --color=always {}" --color="hl:#FDBD9C,hl+:#F81A70"
 end
 
 function fuzz-preview-nvim
-  nvim (fzf -m --preview="bat --color=always {}")
+    nvim (fzf -m --preview="bat --color=always {}" --color="hl:#FDBD9C,hl+:#F81A70")
 end
 
 # Navigation shortcuts
@@ -401,7 +423,10 @@ alias vim="nvim"
 alias cc="clear"
 alias ll="ls -lat"
 alias ff="fuzz-preview"
+alias vv="activate-venv"
 alias nff="fuzz-preview-nvim"
+alias trees="eza --tree"
+alias tree="eza --tree --git-ignore"
 
 # Theme: Kanagawa
 set -l foreground DCD7BA normal
