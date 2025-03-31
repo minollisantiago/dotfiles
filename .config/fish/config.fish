@@ -1,5 +1,7 @@
 if status is-interactive
 
+    cd ~
+
     # Add Homebrew to PATH for Fish
     set -Ux fish_user_paths /home/linuxbrew/.linuxbrew/bin /home/linuxbrew/.linuxbrew/sbin $fish_user_paths
 
@@ -7,7 +9,7 @@ if status is-interactive
     oh-my-posh init fish --config ~/.config/oh-my-posh/santiago.omp.json | source
 
     # Bat syntax highlighting
-    set -Ux BAT_THEME "kanagawa"
+    set -Ux BAT_THEME kanagawa
 
     # Python UVX shell completions
     uvx --generate-shell-completion fish | source
@@ -16,9 +18,9 @@ if status is-interactive
     direnv hook fish | source
 
     # NVM setup (nvm.fish)
-    set -Ux nvm_default_version "lts"
+    set -Ux nvm_default_version lts
     set -gx nvm_mirror "https://nodejs.org/dist"
-    set -gx nvm_default_packages "npm" "pnpm" "yarn"
+    set -gx nvm_default_packages npm pnpm yarn
 
     # Remove Windows Node.js paths from PATH
     set -x PATH (string split : "$PATH" | string match -v "*scoop/apps/nvm*" | string join :)
@@ -81,6 +83,8 @@ if status is-interactive
     alias ff="fuzz-preview"
     alias vv="activate-venv"
     alias nff="fuzz-preview-nvim"
+    alias trees="eza --tree"
+    alias tree="eza --tree --git-ignore"
 
     # Theme: Kanagawa
     set -l foreground DCD7BA normal
